@@ -6,19 +6,22 @@
   <title>Mi Tienda Digital</title>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&family=Outfit:wght@300;400;600;700;800;900&display=swap" rel="stylesheet" />
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
     body {
-      font-family: 'Inter', sans-serif;
-      background: linear-gradient(160deg, #020408 0%, #03070f 35%, #040a18 65%, #060d1e 100%);
-      background-attachment: fixed;
+      font-family: 'Outfit', 'Inter', sans-serif;
+      background: #020408;
       color: #fff;
       min-height: 100vh;
+      background-image:
+        radial-gradient(ellipse 70% 50% at 50% 0%, rgba(30,60,120,.35) 0%, transparent 65%),
+        radial-gradient(ellipse 40% 30% at 10% 50%, rgba(20,40,100,.2) 0%, transparent 55%),
+        radial-gradient(ellipse 40% 30% at 90% 50%, rgba(20,40,100,.2) 0%, transparent 55%);
+      background-attachment: fixed;
     }
 
-    /* ESTRELLAS ANIMADAS */
     .stars-bg { display: none; }
 
     /* NAV */
@@ -31,51 +34,74 @@
       display: flex; align-items: center; justify-content: space-between;
       position: sticky; top: 0; z-index: 100;
     }
-    .nav-logo {
-      font-size: 1.1rem; font-weight: 800;
-      letter-spacing: .06em; color: #fff;
-    }
+    .nav-logo { font-size: 1.1rem; font-weight: 800; letter-spacing: .06em; color: #fff; }
     .nav-logo span { color: #f97316; }
     .nav-links { display: flex; gap: 1.8rem; list-style: none; }
 
-    /* HERO BANNER */
+    /* HERO */
     .hero {
+      position: relative;
+      overflow: hidden;
       background: transparent;
-      border-bottom: 1px solid rgba(255,255,255,.04);
-      padding: 3rem 2rem;
+      border-bottom: 1px solid rgba(255,255,255,.05);
+      padding: 5rem 2rem 4rem;
       text-align: center;
     }
+    .hero::before {
+      content: '';
+      position: absolute; inset: 0;
+      background: radial-gradient(ellipse 70% 90% at 50% 40%, rgba(30,80,200,.13) 0%, transparent 70%);
+      pointer-events: none;
+    }
+    .hero > * { position: relative; z-index: 1; }
     .hero-tag {
-      display: inline-block;
-      background: rgba(96,165,250,.08); color: rgba(255,255,255,.7);
-      font-size: .68rem; font-weight: 700; letter-spacing: .2em;
-      text-transform: uppercase; padding: .6rem 2rem;
-      border-radius: 30px; border: 1px solid rgba(96,165,250,.35);
-      margin-top: 1.2rem;
+      display: inline-flex; align-items: center; gap: .6rem;
+      background: rgba(255,255,255,.04);
+      color: rgba(255,255,255,.5);
+      font-size: .7rem; font-weight: 600; letter-spacing: .18em;
+      text-transform: uppercase; padding: .65rem 1.8rem;
+      border-radius: 30px;
+      border: 1px solid rgba(255,255,255,.1);
+      backdrop-filter: blur(8px);
+      margin-top: 1.5rem;
+    }
+    .hero-tag::before {
+      content: '';
+      width: 6px; height: 6px; border-radius: 50%;
+      background: #60a5fa;
+      box-shadow: 0 0 6px #60a5fa;
+      animation: pulse-dot 2s ease-in-out infinite;
+      flex-shrink: 0;
+    }
+    @keyframes pulse-dot {
+      0%,100% { opacity: 1; transform: scale(1); }
+      50% { opacity: .3; transform: scale(.6); }
     }
     .hero h1 {
-      font-size: clamp(1.6rem, 3vw, 2.4rem);
-      font-weight: 800; line-height: 1.2;
-      margin-bottom: 1.4rem;
+      font-family: 'Outfit', sans-serif;
+      font-size: clamp(2.6rem, 5vw, 4.2rem);
+      font-weight: 900; line-height: 1.08;
+      margin-bottom: 1.2rem;
+      letter-spacing: -.03em;
     }
     .hero h1 span { color: #60a5fa; }
     .hero p {
-      color: rgba(255,255,255,.45); font-size: .88rem;
-      max-width: 42ch; margin: 0 auto 1.4rem;
+      color: rgba(255,255,255,.45); font-size: .95rem;
+      font-weight: 300; letter-spacing: .01em;
+      max-width: 46ch; margin: 0 auto 1.8rem;
     }
 
     /* SECTION TITLE */
     .section-title {
-      padding: 2rem 2rem .8rem;
-      font-size: .9rem; font-weight: 800;
-      letter-spacing: .2em; text-transform: uppercase;
-      color: #60a5fa;
-      display: flex; align-items: center; gap: .8rem;
+      padding: 3rem 2rem 1.5rem;
+      font-family: 'Outfit', sans-serif;
+      font-size: 1rem; font-weight: 800;
+      letter-spacing: .25em; text-transform: uppercase;
+      color: rgba(255,255,255,.8);
+      display: flex; align-items: center; justify-content: center; gap: 1.2rem;
     }
-    .section-title::after {
-      content: ''; flex: 1; height: 1px;
-      background: rgba(255,255,255,.08);
-    }
+    .section-title::before { content: ''; flex: 1; max-width: 120px; height: 1px; background: linear-gradient(90deg, transparent, rgba(96,165,250,.35)); }
+    .section-title::after { content: ''; flex: 1; max-width: 120px; height: 1px; background: linear-gradient(90deg, rgba(96,165,250,.35), transparent); }
 
     /* GRID */
     .grid {
@@ -89,8 +115,7 @@
 
     /* PCARD */
     .pcard {
-      border-radius: 14px;
-      overflow: hidden;
+      border-radius: 14px; overflow: hidden;
       border: 1.5px solid rgba(255,255,255,.1);
       background: rgba(8,14,32,.85);
       backdrop-filter: blur(6px);
@@ -103,36 +128,11 @@
       border-color: rgba(249,115,22,.4);
     }
 
-    /* card top: imagen + badges + logo */
-    .pcard-top {
-      position: relative;
-    }
-    .pcard-covers {
-      display: flex; height: 80px; overflow: hidden;
-    }
-    .pcover {
-      flex: 1; background-size: cover; background-position: center;
-    }
-    .pcover-cr1 { background: linear-gradient(135deg,#1a0a00,#3d1500); }
-    .pcover-cr2 { background: linear-gradient(135deg,#2a0d00,#6b2500); }
-    .pcover-cr3 { background: linear-gradient(135deg,#1f0800,#4a1a00); }
-    .pcard-covers--img {
-      height: 160px;
-      background: url('images/73f84b5255781e01c6dcae23573d22f2.jpg') center top / cover no-repeat;
-      position: relative;
-    }
-    .pcard-covers--img::after {
-      content: '';
-      position: absolute; inset: 0;
-      background: linear-gradient(to bottom, rgba(0,0,0,0) 40%, #13161e 100%);
-    }
+    .pcard-top { position: relative; }
+    .pcard-covers { display: flex; height: 80px; overflow: hidden; }
+    .pcover { flex: 1; background-size: cover; background-position: center; }
 
-    /* PCARD imagen completa */
-    .pcard--full {
-      position: relative;
-      background: rgba(8,14,32,.85);
-      display: flex; flex-direction: column;
-    }
+    .pcard--full { position: relative; background: rgba(8,14,32,.85); display: flex; flex-direction: column; }
     .pcard--full .pcard-bg {
       height: 200px; flex-shrink: 0;
       background: url('images/73f84b5255781e01c6dcae23573d22f2.jpg') center top / cover no-repeat;
@@ -147,40 +147,27 @@
     .pcard-brand-circle {
       position: absolute; top: .6rem; left: .6rem; z-index: 2;
       width: 48px; height: 48px; border-radius: 50%;
-      background: #fff;
-      border: 3px solid rgba(255,255,255,.9);
+      background: #fff; border: 3px solid rgba(255,255,255,.9);
       box-shadow: 0 4px 16px rgba(0,0,0,.5);
-      overflow: hidden;
-      display: flex; align-items: center; justify-content: center;
+      overflow: hidden; display: flex; align-items: center; justify-content: center;
     }
-    .pcard-brand-circle img {
-      width: 100%; height: 100%; object-fit: cover;
-    }
+    .pcard-brand-circle img { width: 100%; height: 100%; object-fit: cover; }
+
     .pcard--full .pcard-content {
       padding: .6rem .8rem 0;
       display: flex; flex-direction: column; gap: .25rem;
+      flex: 1;
     }
     .pcard--full .pcard-title {
       font-size: .72rem; font-weight: 800; color: #fff;
       display: flex; align-items: center; gap: .4rem;
     }
-    .pcard--full .pcard-title img {
-      width: 22px; height: 22px; border-radius: 4px; object-fit: contain;
-    }
-    .pcard--full .cr-logo {
-      width: 22px; height: 22px; border-radius: 4px;
-      background: #f47521;
-      display: inline-flex; align-items: center; justify-content: center;
-      flex-shrink: 0;
-    }
-    .pcard--full .cr-logo svg { width: 14px; height: 14px; }
     .pcard--full .pcard-seller {
       font-size: .68rem; color: #3b82f6; font-weight: 700;
       display: flex; align-items: center; gap: .3rem;
     }
     .pcard--full .pcard-price {
-      font-size: .95rem; font-weight: 800;
-      color: #f97316; margin: .05rem 0;
+      font-size: .95rem; font-weight: 800; color: #f97316; margin: .05rem 0;
     }
     .pcard--full .pcard-period { font-size: .7rem; font-weight: 500; color: rgba(255,255,255,.5); }
     .pcard--full .pcard-stock {
@@ -192,13 +179,15 @@
       display: flex; align-items: center; gap: .3rem;
       padding-bottom: .8rem;
     }
-    .pcard--full .pcard-checks {
-      margin: 0; padding: 0 0 .5rem;
-      border-top: 1px solid rgba(255,255,255,.07);
-      padding-top: .6rem;
-    }
-    .pcard--full .pcard-checks li {
-      font-size: .68rem; margin-bottom: .35rem;
+
+    /* ── BOTÓN RGB CORREGIDO ── */
+    .pcard-btn--wrapper {
+      position: relative;
+      padding: 2px;
+      border-radius: 0 0 13px 13px;
+      background: linear-gradient(90deg, #ff0000, #ff7700, #ffff00, #00ff00, #00ffff, #0000ff, #ff00ff, #ff0000);
+      background-size: 300% 100%;
+      animation: rgb-move 3s linear infinite;
     }
     .pcard-btn--inner {
       display: block; text-align: center;
@@ -206,27 +195,16 @@
       color: #fff;
       text-decoration: none;
       font-size: .72rem; font-weight: 800;
-      letter-spacing: .1em; text-transform: uppercase;
-      padding: .7rem 1rem;
-      border-radius: 0 0 12px 12px;
-      border: 3px solid transparent;
-      background-clip: padding-box;
-      position: relative;
-      transition: transform .15s;
+      letter-spacing: .12em; text-transform: uppercase;
+      padding: .75rem 1rem;
+      border-radius: 0 0 11px 11px;
+      transition: background .2s, letter-spacing .2s;
     }
-    .pcard-btn--inner::before {
-      content: '';
-      position: absolute; inset: -3px;
-      border-radius: 0 0 14px 14px;
-      background: linear-gradient(90deg,
-        #ff0000, #ff7700, #ffff00, #00ff00,
-        #00ffff, #0000ff, #ff00ff, #ff0000);
-      background-size: 300% 100%;
-      animation: rgb-border 3s linear infinite;
-      z-index: -1;
+    .pcard-btn--inner:hover {
+      background: #161820;
+      letter-spacing: .18em;
     }
-    .pcard-btn--inner:hover { transform: scaleY(1.04); }
-    @keyframes rgb-border {
+    @keyframes rgb-move {
       0%   { background-position: 0% 50%; }
       100% { background-position: 300% 50%; }
     }
@@ -240,68 +218,12 @@
       letter-spacing: .08em; padding: .2rem .5rem;
       border-radius: 4px; color: #fff; text-transform: uppercase;
     }
-    .pbadge--red   { background: #dc2626; }
     .pbadge--green { background: #16a34a; }
     .pbadge--blue  { background: #2563eb; }
 
-    .pcard-logo-wrap {
-      position: absolute; bottom: -1.3rem; left: 50%;
-      transform: translateX(-50%);
-      width: 52px; height: 52px; border-radius: 50%;
-      background: #f97316;
-      border: 3px solid #13161e;
-      display: flex; align-items: center; justify-content: center;
-      font-size: 1.5rem; line-height: 1;
-      box-shadow: 0 4px 14px rgba(0,0,0,.4);
-    }
-
-    /* card body */
-    .pcard-body {
-      padding: 2.2rem 1rem .8rem;
-      background: linear-gradient(170deg, #f97316 0%, #c2410c 100%);
-      flex: 1;
-    }
-    .pcard-checks {
-      list-style: none; margin-bottom: .9rem;
-    }
-    .pcard-checks li {
-      display: flex; align-items: center; gap: .5rem;
-      font-size: .75rem; font-weight: 700;
-      color: #fff; margin-bottom: .5rem; line-height: 1;
-    }
-    .pcheck {
-      width: 18px; height: 18px; border-radius: 50%;
-      background: #3b82f6; flex-shrink: 0;
-      display: flex; align-items: center; justify-content: center;
-      font-size: .6rem; font-weight: 900; color: #fff;
-    }
-    .pcard-price {
-      text-align: center;
-      font-size: 1.6rem; font-weight: 800;
-      color: #fff; margin-top: .4rem;
-    }
-    .pcard-period { font-size: .75rem; font-weight: 500; opacity: .8; }
-
-    /* card button */
-    .pcard-btn {
-      display: block; text-align: center;
-      background: transparent;
-      color: #fff;
-      text-decoration: none;
-      font-size: .75rem; font-weight: 800;
-      letter-spacing: .12em; text-transform: uppercase;
-      padding: .75rem;
-      border-top: 1.5px solid rgba(255,255,255,.3);
-      backdrop-filter: blur(16px);
-      -webkit-backdrop-filter: blur(16px);
-      transition: background .2s;
-    }
-    .pcard-btn:hover { background: rgba(255,255,255,.1); }
-
-    /* BOTÓN FLOTANTE WSP */
+    /* FAB WhatsApp */
     .fab-wsp {
-      position: fixed; bottom: 1.5rem; right: 1.5rem;
-      z-index: 999;
+      position: fixed; bottom: 1.5rem; right: 1.5rem; z-index: 999;
       display: flex; align-items: center; gap: .6rem;
       background: #25d366; color: #fff;
       text-decoration: none; border-radius: 50px;
@@ -310,11 +232,9 @@
       box-shadow: 0 6px 24px rgba(37,211,102,.45);
       transition: transform .2s, box-shadow .2s;
     }
-    .fab-wsp:hover {
-      transform: translateY(-3px) scale(1.04);
-      box-shadow: 0 10px 32px rgba(37,211,102,.55);
-    }
+    .fab-wsp:hover { transform: translateY(-3px) scale(1.04); box-shadow: 0 10px 32px rgba(37,211,102,.55); }
     .fab-wsp svg { flex-shrink: 0; }
+
     footer {
       border-top: 1px solid rgba(255,255,255,.07);
       padding: 1.8rem 2rem;
@@ -324,42 +244,33 @@
     .footer-logo { font-weight: 800; color: rgba(255,255,255,.6); letter-spacing: .06em; }
 
     /* RESPONSIVE */
-    @media (max-width: 1100px) {
-      .grid { grid-template-columns: repeat(3, minmax(0, 220px)); }
-    }
+    @media (max-width: 1100px) { .grid { grid-template-columns: repeat(3, minmax(0, 220px)); } }
     @media (max-width: 750px) {
       .grid { grid-template-columns: repeat(2, minmax(0, 220px)); padding: 0 1rem 2rem; }
       .hero { padding: 2rem 1rem; }
       nav { padding: .8rem 1rem; }
       .nav-links { display: none; }
     }
-    @media (max-width: 420px) {
-      .grid { grid-template-columns: 1fr; }
-    }
+    @media (max-width: 420px) { .grid { grid-template-columns: 1fr; } }
   </style>
 </head>
 <body>
 
-  <!-- ESTRELLAS -->
   <div class="stars-bg" id="stars"></div>
 
-  <!-- HERO -->
   <section class="hero">
     <h1>Streaming al mejor<br/><span>precio del mercado</span></h1>
-    <p>Cuentas verificadas con garantía y soporte. Paga por WhatsApp y recibe al instante.</p>
+    <p>Cuentas verificadas con acceso inmediato y sin complicaciones.</p>
     <p class="hero-tag">Cuentas Premium · Entrega inmediata</p>
   </section>
 
-  <!-- PRODUCTS -->
   <p class="section-title" id="productos">Mis Servicios</p>
   <div class="grid">
 
-    <!-- Card 1 – Crunchyroll -->
+    <!-- Crunchyroll -->
     <div class="pcard pcard--full" style="border-color:#f97316;box-shadow:0 0 8px rgba(249,115,22,.6),0 0 20px rgba(249,115,22,.25)">
       <div class="pcard-bg">
-        <div class="pcard-badges">
-          <span class="pbadge pbadge--green">✓ DISPONIBLE</span>
-        </div>
+        <div class="pcard-badges"><span class="pbadge pbadge--green">✓ DISPONIBLE</span></div>
         <div class="pcard-brand-circle">
           <img src="images/Crunchyroll_logo_.webp" alt="Crunchyroll logo">
         </div>
@@ -371,11 +282,10 @@
           <span style="background:#f97316;color:#fff;font-size:.5rem;font-weight:900;padding:.15rem .4rem;border-radius:4px;letter-spacing:.08em;margin-left:.2rem;">PREMIUM</span>
         </p>
         <p class="pcard-seller">
-          <svg width="16" height="16" viewBox="0 0 24 24" fill="#3b82f6" xmlns="http://www.w3.org/2000/svg"><path d="M12 1l2.753 3.37 4.247-.914-.914 4.247L21.5 10.5l-3.414 2.753.914 4.247-4.247-.914L12 20l-2.753-3.414-4.247.914.914-4.247L2.5 10.5l3.414-2.797-.914-4.247 4.247.914L12 1z"/><path d="M9 12l2 2 4-4" stroke="#fff" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" fill="none"/></svg>
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="#3b82f6"><path d="M12 1l2.753 3.37 4.247-.914-.914 4.247L21.5 10.5l-3.414 2.753.914 4.247-4.247-.914L12 20l-2.753-3.414-4.247.914.914-4.247L2.5 10.5l3.414-2.797-.914-4.247 4.247.914L12 1z"/><path d="M9 12l2 2 4-4" stroke="#fff" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" fill="none"/></svg>
           Cuenta verificada 👑
         </p>
         <p style="font-size:.62rem;color:rgba(255,255,255,.4);margin-top:-.1rem;">Sin anuncios · Full HD · 1 perfil personal</p>
-        <!-- Crunchyroll precio naranja -->
         <p class="pcard-price" style="display:flex;align-items:center;gap:.4rem;color:#f97316;">
           <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#f97316" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
           S/ 4.00 <span class="pcard-period">/ mes</span>
@@ -383,17 +293,15 @@
         <p class="pcard-stock">Cupos disponibles</p>
         <p class="pcard-duration">Duración: 1 mes</p>
       </div>
-      <a class="pcard-btn--inner"
-         href="https://wa.me/51926819469?text=QUIERO%20ADQUIRIR%20UN%20PERFIL%20DE%20CRUNCHYROLL%20POR%2030%20DIAS"
-         target="_blank" rel="noopener">Comprar ahora</a>
+      <div class="pcard-btn--wrapper">
+        <a class="pcard-btn--inner" href="https://wa.me/51926819469?text=QUIERO%20ADQUIRIR%20UN%20PERFIL%20DE%20CRUNCHYROLL%20POR%2030%20DIAS" target="_blank" rel="noopener">Comprar ahora</a>
+      </div>
     </div>
 
-    <!-- Card 1b – Disney+ -->
+    <!-- Disney+ -->
     <div class="pcard pcard--full" style="border-color:#1a6fff;box-shadow:0 0 8px rgba(26,111,255,.6),0 0 20px rgba(26,111,255,.25)">
       <div class="pcard-bg" style="background: url('images/disney_imagen.jpg') center center / cover no-repeat;">
-        <div class="pcard-badges">
-          <span class="pbadge pbadge--green">✓ DISPONIBLE</span>
-        </div>
+        <div class="pcard-badges"><span class="pbadge pbadge--green">✓ DISPONIBLE</span></div>
         <div class="pcard-brand-circle" style="background:#00172d;">
           <img src="images/disney_logo.jpg" alt="Disney+" style="width:100%;height:100%;object-fit:contain;padding:4px;border-radius:50%;">
         </div>
@@ -407,11 +315,10 @@
           <span style="background:#1a6fff;color:#fff;font-size:.5rem;font-weight:900;padding:.15rem .4rem;border-radius:4px;letter-spacing:.08em;margin-left:.2rem;">PREMIUM</span>
         </p>
         <p class="pcard-seller">
-          <svg width="16" height="16" viewBox="0 0 24 24" fill="#3b82f6" xmlns="http://www.w3.org/2000/svg"><path d="M12 1l2.753 3.37 4.247-.914-.914 4.247L21.5 10.5l-3.414 2.753.914 4.247-4.247-.914L12 20l-2.753-3.414-4.247.914.914-4.247L2.5 10.5l3.414-2.797-.914-4.247 4.247.914L12 1z"/><path d="M9 12l2 2 4-4" stroke="#fff" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" fill="none"/></svg>
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="#3b82f6"><path d="M12 1l2.753 3.37 4.247-.914-.914 4.247L21.5 10.5l-3.414 2.753.914 4.247-4.247-.914L12 20l-2.753-3.414-4.247.914.914-4.247L2.5 10.5l3.414-2.797-.914-4.247 4.247.914L12 1z"/><path d="M9 12l2 2 4-4" stroke="#fff" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" fill="none"/></svg>
           Cuenta verificada 👑
         </p>
         <p style="font-size:.62rem;color:rgba(255,255,255,.4);margin-top:-.1rem;">Sin anuncios · Full HD · 1 perfil personal</p>
-        <!-- Disney precio azul -->
         <p class="pcard-price" style="display:flex;align-items:center;gap:.4rem;color:#1a6fff;">
           <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#1a6fff" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
           S/ 7.00 <span class="pcard-period">/ mes</span>
@@ -419,17 +326,15 @@
         <p class="pcard-stock">Cupos disponibles</p>
         <p class="pcard-duration">Duración: 1 mes</p>
       </div>
-      <a class="pcard-btn--inner"
-         href="https://wa.me/51926819469?text=QUIERO%20ADQUIRIR%20UN%20PERFIL%20DE%20DISNEY%20PLUS%20POR%2030%20DIAS"
-         target="_blank" rel="noopener">Comprar ahora</a>
+      <div class="pcard-btn--wrapper">
+        <a class="pcard-btn--inner" href="https://wa.me/51926819469?text=QUIERO%20ADQUIRIR%20UN%20PERFIL%20DE%20DISNEY%20PLUS%20POR%2030%20DIAS" target="_blank" rel="noopener">Comprar ahora</a>
+      </div>
     </div>
 
-    <!-- Card 2 – HBO Max -->
-    <div class="pcard pcard--full" style="--bg:linear-gradient(135deg,#001a33,#003d7a);border-color:#7c3aed;box-shadow:0 0 8px rgba(124,58,237,.6),0 0 20px rgba(124,58,237,.25)">
+    <!-- HBO Max -->
+    <div class="pcard pcard--full" style="border-color:#7c3aed;box-shadow:0 0 8px rgba(124,58,237,.6),0 0 20px rgba(124,58,237,.25)">
       <div class="pcard-bg" style="background: url('images/images.jpg') center center / cover no-repeat;">
-        <div class="pcard-badges">
-          <span class="pbadge pbadge--green">✓ DISPONIBLE</span>
-        </div>
+        <div class="pcard-badges"><span class="pbadge pbadge--green">✓ DISPONIBLE</span></div>
         <div class="pcard-brand-circle" style="background:#000;">
           <img src="images/channels4_profile.jpg" alt="HBO Max" style="width:100%;height:100%;object-fit:cover;">
         </div>
@@ -443,11 +348,10 @@
           <span style="background:#6d28d9;color:#fff;font-size:.5rem;font-weight:900;padding:.15rem .4rem;border-radius:4px;letter-spacing:.08em;margin-left:.2rem;">PREMIUM</span>
         </p>
         <p class="pcard-seller">
-          <svg width="16" height="16" viewBox="0 0 24 24" fill="#3b82f6" xmlns="http://www.w3.org/2000/svg"><path d="M12 1l2.753 3.37 4.247-.914-.914 4.247L21.5 10.5l-3.414 2.753.914 4.247-4.247-.914L12 20l-2.753-3.414-4.247.914.914-4.247L2.5 10.5l3.414-2.797-.914-4.247 4.247.914L12 1z"/><path d="M9 12l2 2 4-4" stroke="#fff" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" fill="none"/></svg>
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="#3b82f6"><path d="M12 1l2.753 3.37 4.247-.914-.914 4.247L21.5 10.5l-3.414 2.753.914 4.247-4.247-.914L12 20l-2.753-3.414-4.247.914.914-4.247L2.5 10.5l3.414-2.797-.914-4.247 4.247.914L12 1z"/><path d="M9 12l2 2 4-4" stroke="#fff" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" fill="none"/></svg>
           Cuenta verificada 👑
         </p>
         <p style="font-size:.62rem;color:rgba(255,255,255,.4);margin-top:-.1rem;">Sin anuncios · Full HD · 1 perfil personal</p>
-        <!-- HBO precio morado -->
         <p class="pcard-price" style="display:flex;align-items:center;gap:.4rem;color:#7c3aed;">
           <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#7c3aed" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
           S/ 7.00 <span class="pcard-period">/ mes</span>
@@ -455,19 +359,17 @@
         <p class="pcard-stock">Cupos disponibles</p>
         <p class="pcard-duration">Duración: 1 mes</p>
       </div>
-      <a class="pcard-btn--inner"
-         href="https://wa.me/51926819469?text=QUIERO%20ADQUIRIR%20UN%20PERFIL%20DE%20HBO%20MAX%20POR%2030%20DIAS"
-         target="_blank" rel="noopener">Comprar ahora</a>
+      <div class="pcard-btn--wrapper">
+        <a class="pcard-btn--inner" href="https://wa.me/51926819469?text=QUIERO%20ADQUIRIR%20UN%20PERFIL%20DE%20HBO%20MAX%20POR%2030%20DIAS" target="_blank" rel="noopener">Comprar ahora</a>
+      </div>
     </div>
 
-    <!-- Card 3 – Paramount+ -->
+    <!-- Paramount+ -->
     <div class="pcard pcard--full" style="border-color:#2563eb;box-shadow:0 0 8px rgba(37,99,235,.6),0 0 20px rgba(37,99,235,.25)">
       <div class="pcard-bg" style="background: url('images/paramount-plus-logo-hero.png') center center / cover no-repeat; background-color:#0064ff;">
-        <div class="pcard-badges">
-          <span class="pbadge pbadge--green">✓ DISPONIBLE</span>
-        </div>
+        <div class="pcard-badges"><span class="pbadge pbadge--green">✓ DISPONIBLE</span></div>
         <div class="pcard-brand-circle" style="background:#0064ff;">
-          <img src="images/apps.35768.9007199266243596.ad78eadf-f174-4f68-8c73-562e5c227afa.png" alt="Paramount+" style="width:100%;height:100%;object-fit:cover;">
+          <img src="images/apps.35768.9007199266243596.ad78eadf-f174-4f68-8c73-562e5c227afa.png" alt="Paramount+">
         </div>
       </div>
       <div class="pcard-content">
@@ -479,11 +381,10 @@
           <span style="background:#0064ff;color:#fff;font-size:.5rem;font-weight:900;padding:.15rem .4rem;border-radius:4px;letter-spacing:.08em;margin-left:.2rem;">PREMIUM</span>
         </p>
         <p class="pcard-seller">
-          <svg width="16" height="16" viewBox="0 0 24 24" fill="#3b82f6" xmlns="http://www.w3.org/2000/svg"><path d="M12 1l2.753 3.37 4.247-.914-.914 4.247L21.5 10.5l-3.414 2.753.914 4.247-4.247-.914L12 20l-2.753-3.414-4.247.914.914-4.247L2.5 10.5l3.414-2.797-.914-4.247 4.247.914L12 1z"/><path d="M9 12l2 2 4-4" stroke="#fff" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" fill="none"/></svg>
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="#3b82f6"><path d="M12 1l2.753 3.37 4.247-.914-.914 4.247L21.5 10.5l-3.414 2.753.914 4.247-4.247-.914L12 20l-2.753-3.414-4.247.914.914-4.247L2.5 10.5l3.414-2.797-.914-4.247 4.247.914L12 1z"/><path d="M9 12l2 2 4-4" stroke="#fff" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" fill="none"/></svg>
           Cuenta verificada 👑
         </p>
         <p style="font-size:.62rem;color:rgba(255,255,255,.4);margin-top:-.1rem;">Sin anuncios · Full HD · 1 perfil personal</p>
-        <!-- Paramount precio azul -->
         <p class="pcard-price" style="display:flex;align-items:center;gap:.4rem;color:#2563eb;">
           <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#2563eb" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
           S/ 4.00 <span class="pcard-period">/ mes</span>
@@ -491,19 +392,17 @@
         <p class="pcard-stock">Cupos disponibles</p>
         <p class="pcard-duration">Duración: 1 mes</p>
       </div>
-      <a class="pcard-btn--inner"
-         href="https://wa.me/51926819469?text=QUIERO%20ADQUIRIR%20UN%20PERFIL%20DE%20PARAMOUNT%20PLUS%20POR%2030%20DIAS"
-         target="_blank" rel="noopener">Comprar ahora</a>
+      <div class="pcard-btn--wrapper">
+        <a class="pcard-btn--inner" href="https://wa.me/51926819469?text=QUIERO%20ADQUIRIR%20UN%20PERFIL%20DE%20PARAMOUNT%20PLUS%20POR%2030%20DIAS" target="_blank" rel="noopener">Comprar ahora</a>
+      </div>
     </div>
 
-    <!-- Card 4 – VIX -->
+    <!-- VIX -->
     <div class="pcard pcard--full" style="border-color:#ff6600;box-shadow:0 0 8px rgba(255,102,0,.6),0 0 20px rgba(255,102,0,.25)">
       <div class="pcard-bg" style="background: url('images/VIX-CINE-TV.jpg') center center / cover no-repeat;">
-        <div class="pcard-badges">
-          <span class="pbadge pbadge--green">✓ DISPONIBLE</span>
-        </div>
+        <div class="pcard-badges"><span class="pbadge pbadge--green">✓ DISPONIBLE</span></div>
         <div class="pcard-brand-circle" style="background:#ff6600;">
-          <img src="images/vix_logo.jpg" alt="VIX" style="width:100%;height:100%;object-fit:cover;">
+          <img src="images/vix_logo.jpg" alt="VIX">
         </div>
       </div>
       <div class="pcard-content">
@@ -513,11 +412,10 @@
           <span style="background:#ff6600;color:#fff;font-size:.5rem;font-weight:900;padding:.15rem .4rem;border-radius:4px;letter-spacing:.08em;margin-left:.2rem;">PREMIUM</span>
         </p>
         <p class="pcard-seller">
-          <svg width="16" height="16" viewBox="0 0 24 24" fill="#3b82f6" xmlns="http://www.w3.org/2000/svg"><path d="M12 1l2.753 3.37 4.247-.914-.914 4.247L21.5 10.5l-3.414 2.753.914 4.247-4.247-.914L12 20l-2.753-3.414-4.247.914.914-4.247L2.5 10.5l3.414-2.797-.914-4.247 4.247.914L12 1z"/><path d="M9 12l2 2 4-4" stroke="#fff" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" fill="none"/></svg>
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="#3b82f6"><path d="M12 1l2.753 3.37 4.247-.914-.914 4.247L21.5 10.5l-3.414 2.753.914 4.247-4.247-.914L12 20l-2.753-3.414-4.247.914.914-4.247L2.5 10.5l3.414-2.797-.914-4.247 4.247.914L12 1z"/><path d="M9 12l2 2 4-4" stroke="#fff" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" fill="none"/></svg>
           Cuenta verificada 👑
         </p>
         <p style="font-size:.62rem;color:rgba(255,255,255,.4);margin-top:-.1rem;">Sin anuncios · Full HD · 1 perfil personal</p>
-        <!-- VIX precio naranja -->
         <p class="pcard-price" style="display:flex;align-items:center;gap:.4rem;color:#ff6600;">
           <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#ff6600" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
           S/ 3.50 <span class="pcard-period">/ mes</span>
@@ -525,31 +423,44 @@
         <p class="pcard-stock">Cupos disponibles</p>
         <p class="pcard-duration">Duración: 1 mes</p>
       </div>
-      <a class="pcard-btn--inner"
-         href="https://wa.me/51926819469?text=QUIERO%20ADQUIRIR%20UN%20PERFIL%20DE%20VIX%20POR%2030%20DIAS"
-         target="_blank" rel="noopener">Comprar ahora</a>
+      <div class="pcard-btn--wrapper">
+        <a class="pcard-btn--inner" href="https://wa.me/51926819469?text=QUIERO%20ADQUIRIR%20UN%20PERFIL%20DE%20VIX%20POR%2030%20DIAS" target="_blank" rel="noopener">Comprar ahora</a>
+      </div>
+    </div>
+
+    <!-- Canva Pro -->
+    <div class="pcard pcard--full" style="border-color:#7d2ae8;box-shadow:0 0 6px rgba(125,42,232,.4);">
+      <div class="pcard-bg" style="background: url('images/canva_fondo.png') center center / cover no-repeat;">
+        <div class="pcard-badges"><span class="pbadge pbadge--green">✓ DISPONIBLE</span></div>
+        <div class="pcard-brand-circle" style="background:#7d2ae8;">
+          <img src="images/canva_Logo.png" alt="Canva" style="width:100%;height:100%;object-fit:contain;padding:4px;">
+        </div>
+      </div>
+      <div class="pcard-content">
+        <p class="pcard-title">
+          <span style="background:#7d2ae8;width:20px;height:20px;border-radius:5px;flex-shrink:0;overflow:hidden;display:inline-flex;align-items:center;justify-content:center;">
+            <img src="images/canva_Logo.png" alt="Canva" style="width:100%;height:100%;object-fit:contain;">
+          </span>
+          Canva Pro · 3 meses
+          <span style="background:#7d2ae8;color:#fff;font-size:.5rem;font-weight:900;padding:.15rem .4rem;border-radius:4px;letter-spacing:.08em;margin-left:.2rem;">PRO</span>
+        </p>
+        <p class="pcard-seller">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="#3b82f6"><path d="M12 1l2.753 3.37 4.247-.914-.914 4.247L21.5 10.5l-3.414 2.753.914 4.247-4.247-.914L12 20l-2.753-3.414-4.247.914.914-4.247L2.5 10.5l3.414-2.797-.914-4.247 4.247.914L12 1z"/><path d="M9 12l2 2 4-4" stroke="#fff" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" fill="none"/></svg>
+          Cuenta verificada 👑
+        </p>
+        <p style="font-size:.62rem;color:rgba(255,255,255,.4);margin-top:-.1rem;">Acceso completo · Diseños ilimitados</p>
+        <p class="pcard-price" style="display:flex;align-items:center;gap:.4rem;color:#7d2ae8;">
+          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#7d2ae8" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+          S/ 6.00 <span class="pcard-period">/ 3 meses</span>
+        </p>
+        <p class="pcard-stock">Cupos disponibles</p>
+        <p class="pcard-duration">Duración: 3 meses</p>
+      </div>
+      <div class="pcard-btn--wrapper">
+        <a class="pcard-btn--inner" href="https://wa.me/51926819469?text=QUIERO%20ADQUIRIR%20CANVA%20PRO%20POR%203%20MESES" target="_blank" rel="noopener">Comprar ahora</a>
+      </div>
     </div>
 
   </div>
-
-
-
-  <script>
-    const bg = document.getElementById('stars');
-    for (let i = 0; i < 120; i++) {
-      const s = document.createElement('span');
-      const size = Math.random() * 3 + 1;
-      s.style.cssText = `
-        width:${size}px; height:${size}px;
-        top:${Math.random()*100}%;
-        left:${Math.random()*100}%;
-        --d:${(Math.random()*4+2).toFixed(1)}s;
-        --delay:-${(Math.random()*5).toFixed(1)}s;
-        --op:${(Math.random()*.7+.3).toFixed(2)};
-        box-shadow:0 0 ${size*2}px ${size}px rgba(0,180,255,.6);
-      `;
-      bg.appendChild(s);
-    }
-  </script>
 </body>
 </html>
