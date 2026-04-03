@@ -12,15 +12,21 @@
 
     body {
       font-family: 'Inter', sans-serif;
-      background: #0d0f14;
+      background: linear-gradient(160deg, #020408 0%, #03070f 35%, #040a18 65%, #060d1e 100%);
+      background-attachment: fixed;
       color: #fff;
       min-height: 100vh;
     }
 
+    /* ESTRELLAS ANIMADAS */
+    .stars-bg { display: none; }
+
     /* NAV */
     nav {
-      background: #13161e;
+      background: rgba(8,12,28,.75);
       border-bottom: 1px solid rgba(255,255,255,.07);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
       padding: .9rem 2rem;
       display: flex; align-items: center; justify-content: space-between;
       position: sticky; top: 0; z-index: 100;
@@ -34,25 +40,25 @@
 
     /* HERO BANNER */
     .hero {
-      background: linear-gradient(135deg, #1a1d27 0%, #0d0f14 60%);
-      border-bottom: 1px solid rgba(255,255,255,.06);
+      background: transparent;
+      border-bottom: 1px solid rgba(255,255,255,.04);
       padding: 3rem 2rem;
       text-align: center;
     }
     .hero-tag {
       display: inline-block;
-      background: rgba(249,115,22,.15); color: #f97316;
-      font-size: .68rem; font-weight: 700; letter-spacing: .15em;
-      text-transform: uppercase; padding: .3rem .9rem;
-      border-radius: 20px; border: 1px solid rgba(249,115,22,.3);
-      margin-bottom: 1rem;
+      background: rgba(96,165,250,.08); color: rgba(255,255,255,.7);
+      font-size: .68rem; font-weight: 700; letter-spacing: .2em;
+      text-transform: uppercase; padding: .6rem 2rem;
+      border-radius: 30px; border: 1px solid rgba(96,165,250,.35);
+      margin-top: 1.2rem;
     }
     .hero h1 {
       font-size: clamp(1.6rem, 3vw, 2.4rem);
       font-weight: 800; line-height: 1.2;
       margin-bottom: 1.4rem;
     }
-    .hero h1 span { color: #f97316; }
+    .hero h1 span { color: #60a5fa; }
     .hero p {
       color: rgba(255,255,255,.45); font-size: .88rem;
       max-width: 42ch; margin: 0 auto 1.4rem;
@@ -61,9 +67,9 @@
     /* SECTION TITLE */
     .section-title {
       padding: 2rem 2rem .8rem;
-      font-size: .7rem; font-weight: 700;
+      font-size: .9rem; font-weight: 800;
       letter-spacing: .2em; text-transform: uppercase;
-      color: #f97316;
+      color: #60a5fa;
       display: flex; align-items: center; gap: .8rem;
     }
     .section-title::after {
@@ -86,7 +92,8 @@
       border-radius: 14px;
       overflow: hidden;
       border: 1.5px solid rgba(255,255,255,.1);
-      background: #13161e;
+      background: rgba(8,14,32,.85);
+      backdrop-filter: blur(6px);
       display: flex; flex-direction: column;
       transition: transform .25s, box-shadow .25s, border-color .25s;
     }
@@ -123,7 +130,7 @@
     /* PCARD imagen completa */
     .pcard--full {
       position: relative;
-      background: #13161e;
+      background: rgba(8,14,32,.85);
       display: flex; flex-direction: column;
     }
     .pcard--full .pcard-bg {
@@ -333,6 +340,8 @@
 </head>
 <body>
 
+  <!-- ESTRELLAS -->
+  <div class="stars-bg" id="stars"></div>
 
   <!-- HERO -->
   <section class="hero">
@@ -346,7 +355,7 @@
   <div class="grid">
 
     <!-- Card 1 – Crunchyroll -->
-    <div class="pcard pcard--full">
+    <div class="pcard pcard--full" style="border-color:#f97316;box-shadow:0 0 8px rgba(249,115,22,.6),0 0 20px rgba(249,115,22,.25)">
       <div class="pcard-bg">
         <div class="pcard-badges">
           <span class="pbadge pbadge--green">✓ DISPONIBLE</span>
@@ -366,8 +375,9 @@
           Cuenta verificada 👑
         </p>
         <p style="font-size:.62rem;color:rgba(255,255,255,.4);margin-top:-.1rem;">Sin anuncios · Full HD · 1 perfil personal</p>
-        <p class="pcard-price" style="display:flex;align-items:center;gap:.4rem;">
-          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#22c55e" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+        <!-- Crunchyroll precio naranja -->
+        <p class="pcard-price" style="display:flex;align-items:center;gap:.4rem;color:#f97316;">
+          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#f97316" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
           S/ 4.00 <span class="pcard-period">/ mes</span>
         </p>
         <p class="pcard-stock">Cupos disponibles</p>
@@ -378,8 +388,44 @@
          target="_blank" rel="noopener">Comprar ahora</a>
     </div>
 
+    <!-- Card 1b – Disney+ -->
+    <div class="pcard pcard--full" style="border-color:#1a6fff;box-shadow:0 0 8px rgba(26,111,255,.6),0 0 20px rgba(26,111,255,.25)">
+      <div class="pcard-bg" style="background: url('images/disney_imagen.jpg') center center / cover no-repeat;">
+        <div class="pcard-badges">
+          <span class="pbadge pbadge--green">✓ DISPONIBLE</span>
+        </div>
+        <div class="pcard-brand-circle" style="background:#00172d;">
+          <img src="images/disney_logo.jpg" alt="Disney+" style="width:100%;height:100%;object-fit:contain;padding:4px;border-radius:50%;">
+        </div>
+      </div>
+      <div class="pcard-content">
+        <p class="pcard-title">
+          <span style="background:#00172d;width:20px;height:20px;border-radius:5px;flex-shrink:0;overflow:hidden;display:inline-flex;align-items:center;justify-content:center;">
+            <img src="images/disney_logo.jpg" alt="Disney+" style="width:100%;height:100%;object-fit:contain;">
+          </span>
+          Disney+ · Perfil x 1 mes
+          <span style="background:#1a6fff;color:#fff;font-size:.5rem;font-weight:900;padding:.15rem .4rem;border-radius:4px;letter-spacing:.08em;margin-left:.2rem;">PREMIUM</span>
+        </p>
+        <p class="pcard-seller">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="#3b82f6" xmlns="http://www.w3.org/2000/svg"><path d="M12 1l2.753 3.37 4.247-.914-.914 4.247L21.5 10.5l-3.414 2.753.914 4.247-4.247-.914L12 20l-2.753-3.414-4.247.914.914-4.247L2.5 10.5l3.414-2.797-.914-4.247 4.247.914L12 1z"/><path d="M9 12l2 2 4-4" stroke="#fff" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" fill="none"/></svg>
+          Cuenta verificada 👑
+        </p>
+        <p style="font-size:.62rem;color:rgba(255,255,255,.4);margin-top:-.1rem;">Sin anuncios · Full HD · 1 perfil personal</p>
+        <!-- Disney precio azul -->
+        <p class="pcard-price" style="display:flex;align-items:center;gap:.4rem;color:#1a6fff;">
+          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#1a6fff" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+          S/ 7.00 <span class="pcard-period">/ mes</span>
+        </p>
+        <p class="pcard-stock">Cupos disponibles</p>
+        <p class="pcard-duration">Duración: 1 mes</p>
+      </div>
+      <a class="pcard-btn--inner"
+         href="https://wa.me/51926819469?text=QUIERO%20ADQUIRIR%20UN%20PERFIL%20DE%20DISNEY%20PLUS%20POR%2030%20DIAS"
+         target="_blank" rel="noopener">Comprar ahora</a>
+    </div>
+
     <!-- Card 2 – HBO Max -->
-    <div class="pcard pcard--full" style="--bg:linear-gradient(135deg,#001a33,#003d7a)">
+    <div class="pcard pcard--full" style="--bg:linear-gradient(135deg,#001a33,#003d7a);border-color:#7c3aed;box-shadow:0 0 8px rgba(124,58,237,.6),0 0 20px rgba(124,58,237,.25)">
       <div class="pcard-bg" style="background: url('images/images.jpg') center center / cover no-repeat;">
         <div class="pcard-badges">
           <span class="pbadge pbadge--green">✓ DISPONIBLE</span>
@@ -401,8 +447,9 @@
           Cuenta verificada 👑
         </p>
         <p style="font-size:.62rem;color:rgba(255,255,255,.4);margin-top:-.1rem;">Sin anuncios · Full HD · 1 perfil personal</p>
-        <p class="pcard-price" style="display:flex;align-items:center;gap:.4rem;">
-          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#22c55e" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+        <!-- HBO precio morado -->
+        <p class="pcard-price" style="display:flex;align-items:center;gap:.4rem;color:#7c3aed;">
+          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#7c3aed" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
           S/ 7.00 <span class="pcard-period">/ mes</span>
         </p>
         <p class="pcard-stock">Cupos disponibles</p>
@@ -414,7 +461,7 @@
     </div>
 
     <!-- Card 3 – Paramount+ -->
-    <div class="pcard pcard--full">
+    <div class="pcard pcard--full" style="border-color:#2563eb;box-shadow:0 0 8px rgba(37,99,235,.6),0 0 20px rgba(37,99,235,.25)">
       <div class="pcard-bg" style="background: url('images/paramount-plus-logo-hero.png') center center / cover no-repeat; background-color:#0064ff;">
         <div class="pcard-badges">
           <span class="pbadge pbadge--green">✓ DISPONIBLE</span>
@@ -436,8 +483,9 @@
           Cuenta verificada 👑
         </p>
         <p style="font-size:.62rem;color:rgba(255,255,255,.4);margin-top:-.1rem;">Sin anuncios · Full HD · 1 perfil personal</p>
-        <p class="pcard-price" style="display:flex;align-items:center;gap:.4rem;">
-          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#22c55e" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+        <!-- Paramount precio azul -->
+        <p class="pcard-price" style="display:flex;align-items:center;gap:.4rem;color:#2563eb;">
+          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#2563eb" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
           S/ 4.00 <span class="pcard-period">/ mes</span>
         </p>
         <p class="pcard-stock">Cupos disponibles</p>
@@ -449,7 +497,7 @@
     </div>
 
     <!-- Card 4 – VIX -->
-    <div class="pcard pcard--full">
+    <div class="pcard pcard--full" style="border-color:#ff6600;box-shadow:0 0 8px rgba(255,102,0,.6),0 0 20px rgba(255,102,0,.25)">
       <div class="pcard-bg" style="background: url('images/VIX-CINE-TV.jpg') center center / cover no-repeat;">
         <div class="pcard-badges">
           <span class="pbadge pbadge--green">✓ DISPONIBLE</span>
@@ -469,8 +517,9 @@
           Cuenta verificada 👑
         </p>
         <p style="font-size:.62rem;color:rgba(255,255,255,.4);margin-top:-.1rem;">Sin anuncios · Full HD · 1 perfil personal</p>
-        <p class="pcard-price" style="display:flex;align-items:center;gap:.4rem;">
-          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#22c55e" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+        <!-- VIX precio naranja -->
+        <p class="pcard-price" style="display:flex;align-items:center;gap:.4rem;color:#ff6600;">
+          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#ff6600" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
           S/ 3.50 <span class="pcard-period">/ mes</span>
         </p>
         <p class="pcard-stock">Cupos disponibles</p>
@@ -485,5 +534,22 @@
 
 
 
+  <script>
+    const bg = document.getElementById('stars');
+    for (let i = 0; i < 120; i++) {
+      const s = document.createElement('span');
+      const size = Math.random() * 3 + 1;
+      s.style.cssText = `
+        width:${size}px; height:${size}px;
+        top:${Math.random()*100}%;
+        left:${Math.random()*100}%;
+        --d:${(Math.random()*4+2).toFixed(1)}s;
+        --delay:-${(Math.random()*5).toFixed(1)}s;
+        --op:${(Math.random()*.7+.3).toFixed(2)};
+        box-shadow:0 0 ${size*2}px ${size}px rgba(0,180,255,.6);
+      `;
+      bg.appendChild(s);
+    }
+  </script>
 </body>
 </html>
