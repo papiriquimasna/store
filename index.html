@@ -180,7 +180,8 @@
       position: absolute; inset: 0;
       background: linear-gradient(to bottom, rgba(0,0,0,.1) 50%, rgba(0,0,0,.7) 100%);
     }
-    .pcard--full .pcard-badges { z-index: 2; position: absolute; top: .45rem; right: .45rem; }
+    .pcard-bg--img { position: relative; overflow: hidden; }
+    .pcard-bg--img img { display: block; }
     .pcard-brand-circle {
       position: absolute; top: .6rem; left: .6rem; z-index: 2;
       width: 48px; height: 48px; border-radius: 50%;
@@ -300,8 +301,8 @@
     <p>Cuentas verificadas con acceso inmediato y sin complicaciones.</p>
     <div class="hero-platforms">
       <img src="images/Crunchyroll_logo_.webp" alt="Crunchyroll">
-      <img src="images/disney_logo.jpg" alt="Disney+">
-      <img src="images/channels4_profile.jpg" alt="HBO Max">
+      <img src="images/disney_logo.png" alt="Disney+">
+      <img src="images/hbomax_logo.jpg" alt="HBO Max">
       <img src="images/apps.35768.9007199266243596.ad78eadf-f174-4f68-8c73-562e5c227afa.png" alt="Paramount+">
       <img src="images/vix_logo.jpg" alt="VIX">
       <img src="images/canva_Logo.png" alt="Canva">
@@ -317,7 +318,6 @@
     <div class="pcard pcard--full" style="border-color:#f97316;box-shadow:0 0 8px rgba(249,115,22,.6),0 0 20px rgba(249,115,22,.25)">
       <div class="pcard-bg">
         <div class="ribbon">Más vendido</div>
-        <div class="pcard-badges"><span class="pbadge pbadge--green">✓ DISPONIBLE</span></div>
         <div class="pcard-brand-circle">
           <img src="images/Crunchyroll_logo_.webp" alt="Crunchyroll logo">
         </div>
@@ -347,16 +347,15 @@
 
     <!-- Disney+ -->
     <div class="pcard pcard--full" style="border-color:#1a6fff;box-shadow:0 0 8px rgba(26,111,255,.6),0 0 20px rgba(26,111,255,.25)">
-      <div class="pcard-bg" style="background: url('images/disney_imagen.jpg') center center / cover no-repeat;">
-        <div class="pcard-badges"><span class="pbadge pbadge--green">✓ DISPONIBLE</span></div>
+      <div class="pcard-bg" style="background: url('images/disney_fondo.png') center center / cover no-repeat;">
         <div class="pcard-brand-circle" style="background:#00172d;">
-          <img src="images/disney_logo.jpg" alt="Disney+" style="width:100%;height:100%;object-fit:contain;padding:4px;border-radius:50%;">
+          <img src="images/disney_logo.png" alt="Disney+" style="width:100%;height:100%;object-fit:cover;border-radius:50%;">
         </div>
       </div>
       <div class="pcard-content">
         <p class="pcard-title">
           <span style="background:#00172d;width:20px;height:20px;border-radius:5px;flex-shrink:0;overflow:hidden;display:inline-flex;align-items:center;justify-content:center;">
-            <img src="images/disney_logo.jpg" alt="Disney+" style="width:100%;height:100%;object-fit:contain;">
+            <img src="images/disney_logo.png" alt="Disney+" style="width:100%;height:100%;object-fit:contain;">
           </span>
           Disney+ · Perfil x 1 mes
           <span style="background:#1a6fff;color:#fff;font-size:.5rem;font-weight:900;padding:.15rem .4rem;border-radius:4px;letter-spacing:.08em;margin-left:.2rem;">PREMIUM</span>
@@ -380,16 +379,16 @@
 
     <!-- HBO Max -->
     <div class="pcard pcard--full" style="border-color:#7c3aed;box-shadow:0 0 8px rgba(124,58,237,.6),0 0 20px rgba(124,58,237,.25)">
-      <div class="pcard-bg" style="background: url('images/images.jpg') center center / cover no-repeat;">
-        <div class="pcard-badges"><span class="pbadge pbadge--green">✓ DISPONIBLE</span></div>
+      <div class="pcard-bg pcard-bg--img" style="background-color:#1a0030;">
+        <img src="images/hbomax_fondo.png" alt="" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center;z-index:0;">
         <div class="pcard-brand-circle" style="background:#000;">
-          <img src="images/channels4_profile.jpg" alt="HBO Max" style="width:100%;height:100%;object-fit:cover;">
+          <img src="images/hbomax_logo.jpg" alt="HBO Max" style="width:100%;height:100%;object-fit:cover;">
         </div>
       </div>
       <div class="pcard-content">
         <p class="pcard-title">
           <span style="background:#000;width:28px;height:28px;border-radius:6px;flex-shrink:0;overflow:hidden;display:inline-flex;align-items:center;justify-content:center;">
-            <img src="images/channels4_profile.jpg" alt="HBO Max" style="width:100%;height:100%;object-fit:cover;">
+            <img src="images/hbomax_logo.jpg" alt="HBO Max" style="width:100%;height:100%;object-fit:cover;">
           </span>
           HBO Max · Perfil x 1 mes
           <span style="background:#6d28d9;color:#fff;font-size:.5rem;font-weight:900;padding:.15rem .4rem;border-radius:4px;letter-spacing:.08em;margin-left:.2rem;">PREMIUM</span>
@@ -414,7 +413,6 @@
     <!-- Paramount+ -->
     <div class="pcard pcard--full" style="border-color:#2563eb;box-shadow:0 0 8px rgba(37,99,235,.6),0 0 20px rgba(37,99,235,.25)">
       <div class="pcard-bg" style="background: url('images/paramount-plus-logo-hero.png') center center / cover no-repeat; background-color:#0064ff;">
-        <div class="pcard-badges"><span class="pbadge pbadge--green">✓ DISPONIBLE</span></div>
         <div class="pcard-brand-circle" style="background:#0064ff;">
           <img src="images/apps.35768.9007199266243596.ad78eadf-f174-4f68-8c73-562e5c227afa.png" alt="Paramount+">
         </div>
@@ -447,7 +445,6 @@
     <!-- VIX -->
     <div class="pcard pcard--full" style="border-color:#ff6600;box-shadow:0 0 8px rgba(255,102,0,.6),0 0 20px rgba(255,102,0,.25)">
       <div class="pcard-bg" style="background: url('images/VIX-CINE-TV.jpg') center center / cover no-repeat;">
-        <div class="pcard-badges"><span class="pbadge pbadge--green">✓ DISPONIBLE</span></div>
         <div class="pcard-brand-circle" style="background:#ff6600;">
           <img src="images/vix_logo.jpg" alt="VIX">
         </div>
@@ -478,9 +475,8 @@
     <!-- Canva Pro -->
     <div class="pcard pcard--full" style="border-color:#7d2ae8;box-shadow:0 0 6px rgba(125,42,232,.4);">
       <div class="pcard-bg" style="background: url('images/canva_fondo.png') center center / cover no-repeat;">
-        <div class="pcard-badges"><span class="pbadge pbadge--green">✓ DISPONIBLE</span></div>
         <div class="pcard-brand-circle" style="background:#7d2ae8;">
-          <img src="images/canva_Logo.png" alt="Canva" style="width:100%;height:100%;object-fit:contain;padding:4px;">
+          <img src="images/canva_Logo.png" alt="Canva" style="width:100%;height:100%;object-fit:cover;">
         </div>
       </div>
       <div class="pcard-content">
@@ -511,7 +507,6 @@
     <!-- CapCut Pro -->
     <div class="pcard pcard--full" style="border-color:#00d4ff;box-shadow:0 0 8px rgba(0,212,255,.6),0 0 20px rgba(0,212,255,.25)">
       <div class="pcard-bg" style="background: url('images/capcut_fondo.jpg') center center / cover no-repeat;">
-        <div class="pcard-badges"><span class="pbadge pbadge--green">✓ DISPONIBLE</span></div>
         <div class="pcard-brand-circle" style="background:#000;">
           <img src="images/capcut_logo.png" alt="CapCut" style="width:100%;height:100%;object-fit:contain;padding:4px;">
         </div>
@@ -544,3 +539,4 @@
   </div>
 </body>
 </html>
+
