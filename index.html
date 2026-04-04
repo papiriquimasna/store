@@ -16,11 +16,19 @@
       color: #fff;
       min-height: 100vh;
       background-image:
-        radial-gradient(ellipse 70% 50% at 50% 0%, rgba(30,60,120,.35) 0%, transparent 65%),
-        radial-gradient(ellipse 40% 30% at 10% 50%, rgba(20,40,100,.2) 0%, transparent 55%),
-        radial-gradient(ellipse 40% 30% at 90% 50%, rgba(20,40,100,.2) 0%, transparent 55%);
+        radial-gradient(ellipse 100% 60% at 50% 0%, rgba(15,40,100,.5) 0%, transparent 60%),
+        radial-gradient(ellipse 60% 40% at 0% 60%, rgba(10,30,80,.3) 0%, transparent 50%),
+        radial-gradient(ellipse 60% 40% at 100% 60%, rgba(10,30,80,.3) 0%, transparent 50%),
+        radial-gradient(ellipse 80% 50% at 50% 100%, rgba(5,15,50,.4) 0%, transparent 60%);
       background-attachment: fixed;
     }
+
+    /* CANVAS FONDO */
+    #bg-canvas {
+      position: fixed; inset: 0;
+      z-index: 0; pointer-events: none;
+    }
+    body > *:not(#bg-canvas) { position: relative; z-index: 1; }
 
     .stars-bg { display: none; }
 
@@ -114,10 +122,11 @@
     }
     .hero h1 {
       font-family: 'Outfit', sans-serif;
-      font-size: clamp(2.6rem, 5vw, 4.2rem);
-      font-weight: 900; line-height: 1.08;
+      font-size: clamp(3.2rem, 7vw, 6rem);
+      font-weight: 900; line-height: 1.05;
       margin-bottom: 1.2rem;
-      letter-spacing: -.03em;
+      letter-spacing: -.04em;
+      text-shadow: 0 0 80px rgba(96,165,250,.15);
     }
     .hero h1 span { color: #60a5fa; }
     .hero p {
@@ -125,18 +134,17 @@
       font-weight: 300; letter-spacing: .01em;
       max-width: 46ch; margin: 0 auto 1.8rem;
     }
-
     /* SECTION TITLE */
     .section-title {
-      padding: 3rem 2rem 1.5rem;
+      padding: 4rem 2rem 2rem;
       font-family: 'Outfit', sans-serif;
-      font-size: 1rem; font-weight: 800;
+      font-size: 1.1rem; font-weight: 800;
       letter-spacing: .25em; text-transform: uppercase;
       color: rgba(255,255,255,.8);
       display: flex; align-items: center; justify-content: center; gap: 1.2rem;
     }
     .section-title::before { content: ''; flex: 1; max-width: 120px; height: 1px; background: linear-gradient(90deg, transparent, rgba(96,165,250,.35)); }
-    .section-title::after { content: ''; flex: 1; max-width: 120px; height: 1px; background: linear-gradient(90deg, rgba(96,165,250,.35), transparent); }
+    .section-title::after  { content: ''; flex: 1; max-width: 120px; height: 1px; background: linear-gradient(90deg, rgba(96,165,250,.35), transparent); }
 
     /* GRID */
     .grid {
@@ -280,6 +288,42 @@
       color: rgba(255,255,255,.3); font-size: .72rem;
     }
     .footer-logo { font-weight: 800; color: rgba(255,255,255,.6); letter-spacing: .06em; }
+
+    /* FAQ */
+    .faq {
+      max-width: 680px; margin: 0 auto;
+      padding: 0 2rem 5rem;
+    }
+    .faq .section-title { justify-content: center; }
+    .faq-list { display: flex; flex-direction: column; gap: .6rem; margin-top: .5rem; }
+    .faq-item {
+      border: 1px solid rgba(255,255,255,.08);
+      border-radius: 12px;
+      overflow: hidden;
+      background: rgba(255,255,255,.03);
+      transition: border-color .25s;
+    }
+    .faq-item.open { border-color: rgba(96,165,250,.35); }
+    .faq-q {
+      width: 100%; display: flex; align-items: center; justify-content: space-between;
+      gap: 1rem; padding: 1rem 1.2rem;
+      background: none; border: none; cursor: pointer;
+      color: #fff; font-family: 'Outfit', sans-serif;
+      font-size: .88rem; font-weight: 600; text-align: left;
+    }
+    .faq-icon {
+      width: 18px; height: 18px; flex-shrink: 0;
+      color: rgba(255,255,255,.4);
+      transition: transform .3s;
+    }
+    .faq-item.open .faq-icon { transform: rotate(180deg); color: #60a5fa; }
+    .faq-a {
+      max-height: 0; overflow: hidden;
+      font-size: .82rem; color: rgba(255,255,255,.5);
+      line-height: 1.7; padding: 0 1.2rem;
+      transition: max-height .35s ease, padding .35s ease;
+    }
+    .faq-item.open .faq-a { max-height: 120px; padding: 0 1.2rem 1rem; }
 
     /* RESPONSIVE */
     @media (max-width: 1100px) { .grid { grid-template-columns: repeat(3, minmax(0, 220px)); } }
@@ -537,6 +581,107 @@
     </div>
 
   </div>
+
+  <!-- FAQ -->
+  <section class="faq">
+    <p class="section-title">Preguntas frecuentes</p>
+    <div class="faq-list">
+
+      <div class="faq-item">
+        <button class="faq-q" onclick="toggleFaq(this)">
+          <span>¿Cuándo recibo mi cuenta?</span>
+          <svg class="faq-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M6 9l6 6 6-6"/></svg>
+        </button>
+        <div class="faq-a">Recibes el acceso de la cuenta luego de realizar el pago.</div>
+      </div>
+
+      <div class="faq-item">
+        <button class="faq-q" onclick="toggleFaq(this)">
+          <span>¿Las cuentas son seguras?</span>
+          <svg class="faq-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M6 9l6 6 6-6"/></svg>
+        </button>
+        <div class="faq-a">Sí, todas nuestras cuentas son verificadas y funcionan correctamente desde el primer momento.</div>
+      </div>
+
+
+      <div class="faq-item">
+        <button class="faq-q" onclick="toggleFaq(this)">
+          <span>¿El acceso es por perfil o por dispositivo?</span>
+          <svg class="faq-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M6 9l6 6 6-6"/></svg>
+        </button>
+        <div class="faq-a">El servicio corresponde a un perfil personal dentro de la cuenta. No es válido para múltiples dispositivos al mismo tiempo.</div>
+      </div>
+
+      <div class="faq-item">
+        <button class="faq-q" onclick="toggleFaq(this)">
+          <span>¿Qué pasa si tengo algún problema?</span>
+          <svg class="faq-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M6 9l6 6 6-6"/></svg>
+        </button>
+        <div class="faq-a">Brindamos soporte y solución durante todo el tiempo del servicio. Solo escríbenos por WhatsApp y lo resolvemos.</div>
+      </div>
+
+      <div class="faq-item">
+        <button class="faq-q" onclick="toggleFaq(this)">
+          <span>¿Qué métodos de pago aceptan?</span>
+          <svg class="faq-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M6 9l6 6 6-6"/></svg>
+        </button>
+        <div class="faq-a">Aceptamos los métodos de pago disponibles por WhatsApp. Contáctanos y te indicamos cuál se adapta mejor a ti.</div>
+      </div>
+
+    </div>
+  </section>
+
+  <canvas id="bg-canvas"></canvas>
+  <script>
+    function toggleFaq(btn) {
+      const item = btn.parentElement;
+      const isOpen = item.classList.contains('open');
+      document.querySelectorAll('.faq-item.open').forEach(i => i.classList.remove('open'));
+      if (!isOpen) item.classList.add('open');
+    }
+    const canvas = document.getElementById('bg-canvas');
+    const ctx = canvas.getContext('2d');
+    let W, H, pts, glows;
+    function resize() { W = canvas.width = window.innerWidth; H = canvas.height = window.innerHeight; }
+    function init() {
+      pts = Array.from({length:80}, () => ({
+        x:Math.random()*W, y:Math.random()*H,
+        r:Math.random()*1.4+.3,
+        vx:(Math.random()-.5)*.25, vy:(Math.random()-.5)*.25,
+        a:Math.random()*.55+.1
+      }));
+      glows = [
+        {x:W*.2,  y:H*.15, r:320, c:'30,80,200',  a:.13},
+        {x:W*.8,  y:H*.35, r:260, c:'80,20,180',  a:.11},
+        {x:W*.5,  y:H*.7,  r:360, c:'10,60,160',  a:.10},
+        {x:W*.05, y:H*.65, r:200, c:'50,10,140',  a:.08},
+        {x:W*.95, y:H*.8,  r:220, c:'20,50,180',  a:.08},
+      ];
+    }
+    function draw() {
+      ctx.clearRect(0,0,W,H);
+      glows.forEach(g => {
+        const gr = ctx.createRadialGradient(g.x,g.y,0,g.x,g.y,g.r);
+        gr.addColorStop(0,`rgba(${g.c},${g.a})`);
+        gr.addColorStop(1,`rgba(${g.c},0)`);
+        ctx.fillStyle = gr;
+        ctx.beginPath(); ctx.arc(g.x,g.y,g.r,0,Math.PI*2); ctx.fill();
+      });
+      pts.forEach(p => {
+        p.x+=p.vx; p.y+=p.vy;
+        if(p.x<0)p.x=W; if(p.x>W)p.x=0;
+        if(p.y<0)p.y=H; if(p.y>H)p.y=0;
+        ctx.beginPath(); ctx.arc(p.x,p.y,p.r,0,Math.PI*2);
+        ctx.fillStyle=`rgba(100,160,255,${p.a})`;
+        ctx.shadowBlur=8; ctx.shadowColor='rgba(80,140,255,.7)';
+        ctx.fill(); ctx.shadowBlur=0;
+      });
+      requestAnimationFrame(draw);
+    }
+    window.addEventListener('resize',()=>{resize();init();});
+    resize(); init(); draw();
+  </script>
+
 </body>
 </html>
 
