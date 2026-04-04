@@ -73,7 +73,42 @@
       animation: pulse-dot 2s ease-in-out infinite;
       flex-shrink: 0;
     }
-    @keyframes pulse-dot {
+    .hero-platforms {
+      display: flex; align-items: center; justify-content: center;
+      gap: 1rem; margin-bottom: 1.8rem; flex-wrap: wrap;
+    }
+    .hero-platforms img {
+      width: 36px; height: 36px; border-radius: 10px;
+      object-fit: cover;
+      opacity: .55;
+      filter: grayscale(30%);
+      transition: opacity .3s, transform .3s, filter .3s;
+      animation: float-logo 4s ease-in-out infinite;
+    }
+    .hero-platforms img:nth-child(1) { animation-delay: 0s; }
+    .hero-platforms img:nth-child(2) { animation-delay: .4s; }
+    .hero-platforms img:nth-child(3) { animation-delay: .8s; }
+    .hero-platforms img:nth-child(4) { animation-delay: 1.2s; }
+    .hero-platforms img:nth-child(5) { animation-delay: 1.6s; }
+    .hero-platforms img:nth-child(6) { animation-delay: 2s; }
+    .hero-platforms img:hover {
+      opacity: 1; transform: translateY(-4px) scale(1.15);
+      filter: grayscale(0%);
+    }
+    .ribbon {
+      position: absolute; top: 16px; left: -28px;
+      background: linear-gradient(90deg, #f97316, #ef4444);
+      color: #fff; font-size: .55rem; font-weight: 900;
+      letter-spacing: .1em; text-transform: uppercase;
+      padding: .35rem 3rem;
+      transform: rotate(-45deg);
+      z-index: 3;
+      box-shadow: 0 2px 8px rgba(0,0,0,.4);
+    }
+    @keyframes float-logo {
+      0%,100% { transform: translateY(0); }
+      50%      { transform: translateY(-5px); }
+    }
       0%,100% { opacity: 1; transform: scale(1); }
       50% { opacity: .3; transform: scale(.6); }
     }
@@ -132,12 +167,14 @@
     .pcard-covers { display: flex; height: 80px; overflow: hidden; }
     .pcover { flex: 1; background-size: cover; background-position: center; }
 
-    .pcard--full { position: relative; background: rgba(8,14,32,.85); display: flex; flex-direction: column; }
+    .pcard--full { position: relative; background: rgba(8,14,32,.85); display: flex; flex-direction: column; overflow: hidden; }
     .pcard--full .pcard-bg {
       height: 200px; flex-shrink: 0;
       background: url('images/73f84b5255781e01c6dcae23573d22f2.jpg') center top / cover no-repeat;
       position: relative;
+      transition: transform .45s ease;
     }
+    .pcard--full:hover .pcard-bg { transform: scale(1.07); }
     .pcard--full .pcard-bg::after {
       content: '';
       position: absolute; inset: 0;
@@ -147,7 +184,7 @@
     .pcard-brand-circle {
       position: absolute; top: .6rem; left: .6rem; z-index: 2;
       width: 48px; height: 48px; border-radius: 50%;
-      background: #fff; border: 3px solid rgba(255,255,255,.9);
+      background: #fff; border: 1.5px solid rgba(255,255,255,.5);
       box-shadow: 0 4px 16px rgba(0,0,0,.5);
       overflow: hidden; display: flex; align-items: center; justify-content: center;
     }
@@ -261,15 +298,25 @@
   <section class="hero">
     <h1>Streaming al mejor<br/><span>precio del mercado</span></h1>
     <p>Cuentas verificadas con acceso inmediato y sin complicaciones.</p>
+    <div class="hero-platforms">
+      <img src="images/Crunchyroll_logo_.webp" alt="Crunchyroll">
+      <img src="images/disney_logo.jpg" alt="Disney+">
+      <img src="images/channels4_profile.jpg" alt="HBO Max">
+      <img src="images/apps.35768.9007199266243596.ad78eadf-f174-4f68-8c73-562e5c227afa.png" alt="Paramount+">
+      <img src="images/vix_logo.jpg" alt="VIX">
+      <img src="images/canva_Logo.png" alt="Canva">
+      <img src="images/capcut_logo.png" alt="CapCut">
+    </div>
     <p class="hero-tag">Cuentas Premium · Entrega inmediata</p>
   </section>
 
-  <p class="section-title" id="productos">Mis Servicios</p>
+  <p class="section-title" id="productos">Elige tu plataforma</p>
   <div class="grid">
 
     <!-- Crunchyroll -->
     <div class="pcard pcard--full" style="border-color:#f97316;box-shadow:0 0 8px rgba(249,115,22,.6),0 0 20px rgba(249,115,22,.25)">
       <div class="pcard-bg">
+        <div class="ribbon">Más vendido</div>
         <div class="pcard-badges"><span class="pbadge pbadge--green">✓ DISPONIBLE</span></div>
         <div class="pcard-brand-circle">
           <img src="images/Crunchyroll_logo_.webp" alt="Crunchyroll logo">
@@ -458,6 +505,39 @@
       </div>
       <div class="pcard-btn--wrapper">
         <a class="pcard-btn--inner" href="https://wa.me/51926819469?text=QUIERO%20ADQUIRIR%20CANVA%20PRO%20POR%203%20MESES" target="_blank" rel="noopener">Comprar ahora</a>
+      </div>
+    </div>
+
+    <!-- CapCut Pro -->
+    <div class="pcard pcard--full" style="border-color:#00d4ff;box-shadow:0 0 8px rgba(0,212,255,.6),0 0 20px rgba(0,212,255,.25)">
+      <div class="pcard-bg" style="background: url('images/capcut_fondo.jpg') center center / cover no-repeat;">
+        <div class="pcard-badges"><span class="pbadge pbadge--green">✓ DISPONIBLE</span></div>
+        <div class="pcard-brand-circle" style="background:#000;">
+          <img src="images/capcut_logo.png" alt="CapCut" style="width:100%;height:100%;object-fit:contain;padding:4px;">
+        </div>
+      </div>
+      <div class="pcard-content">
+        <p class="pcard-title">
+          <span style="background:#000;width:20px;height:20px;border-radius:5px;flex-shrink:0;overflow:hidden;display:inline-flex;align-items:center;justify-content:center;">
+            <img src="images/capcut_logo.png" alt="CapCut" style="width:100%;height:100%;object-fit:contain;">
+          </span>
+          CapCut Pro · 1 mes
+          <span style="background:#00d4ff;color:#000;font-size:.5rem;font-weight:900;padding:.15rem .4rem;border-radius:4px;letter-spacing:.08em;margin-left:.2rem;">PRO</span>
+        </p>
+        <p class="pcard-seller">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="#3b82f6"><path d="M12 1l2.753 3.37 4.247-.914-.914 4.247L21.5 10.5l-3.414 2.753.914 4.247-4.247-.914L12 20l-2.753-3.414-4.247.914.914-4.247L2.5 10.5l3.414-2.797-.914-4.247 4.247.914L12 1z"/><path d="M9 12l2 2 4-4" stroke="#fff" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" fill="none"/></svg>
+          Cuenta verificada 👑
+        </p>
+        <p style="font-size:.62rem;color:rgba(255,255,255,.4);margin-top:-.1rem;">Sin marca de agua · Efectos Pro</p>
+        <p class="pcard-price" style="display:flex;align-items:center;gap:.4rem;color:#00d4ff;">
+          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#00d4ff" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+          S/ 12.00 <span class="pcard-period">/ mes</span>
+        </p>
+        <p class="pcard-stock">Cupos disponibles</p>
+        <p class="pcard-duration">Duración: 1 mes</p>
+      </div>
+      <div class="pcard-btn--wrapper">
+        <a class="pcard-btn--inner" href="https://wa.me/51926819469?text=QUIERO%20ADQUIRIR%20CAPCUT%20PRO%20POR%2030%20DIAS" target="_blank" rel="noopener">Comprar ahora</a>
       </div>
     </div>
 
