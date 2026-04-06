@@ -1343,13 +1343,9 @@
 
   </div>
 
-    </div><!-- end main-content -->
-  </div><!-- end page-layout -->
-
-  <!-- Seccion Consultas -->
-  <p class="section-title" style="padding-top:3rem;">Consultas e Info</p>
-  <div style="display:flex;justify-content:center;padding:0 2rem 4rem;isolation:isolate;">
-    <div id="card-doxeo" data-name="doxeo info consulta" class="pcard pcard--full" onclick="openDoxeoModal()" style="border-color:#a855f7;box-shadow:0 0 8px rgba(168,85,247,.5),0 0 20px rgba(168,85,247,.2);cursor:pointer;max-width:280px;width:100%;">
+  <p class="section-title" id="section-consultas">Consultas e Info</p>
+  <div class="grid" id="grid-consultas">
+    <div id="card-doxeo" data-name="doxeo info consulta" class="pcard pcard--full" onclick="openDoxeoModal()" style="border-color:#a855f7;box-shadow:0 0 8px rgba(168,85,247,.5),0 0 20px rgba(168,85,247,.2);cursor:pointer;">
       <div class="pcard-bg" style="background: url('images/doxeo.jpg') center center / cover no-repeat; background-color:#1a0030;">
         <div class="pcard-brand-circle" style="background:linear-gradient(135deg,#7c3aed,#a855f7);">
           <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><path d="M21 21l-4.35-4.35"/></svg>
@@ -1372,6 +1368,11 @@
       </div>
     </div>
   </div>
+
+    </div><!-- end main-content -->
+  </div><!-- end page-layout -->
+
+  <!-- Seccion Consultas (eliminada, movida al grid) -->
 
   <!-- FAQ -->
   <section class="faq">
@@ -1442,32 +1443,18 @@
       const term = q.toLowerCase().trim();
       document.querySelectorAll('#sidebar-search, .search-bar-top input').forEach(i => { if(i.value !== q) i.value = q; });
 
-      // filtrar cards dentro del grid
       document.querySelectorAll('.pcard[data-name]').forEach(card => {
-        const name = card.dataset.name || '';
-        const match = term === '' || name.includes(term);
+        const match = term === '' || (card.dataset.name || '').includes(term);
         card.classList.toggle('hidden', !match);
       });
 
-      // mostrar/ocultar card de doxeo (está fuera del grid)
-      const doxeo = document.getElementById('card-doxeo');
-      if (doxeo) {
-        const doxeoName = doxeo.dataset.name || '';
-        const doxeoMatch = term === '' || doxeoName.includes(term);
-        const doxeoSection = doxeo.closest('div[style*="justify-content:center"]');
-        const doxeoTitle = doxeoSection ? doxeoSection.previousElementSibling : null;
-        if (doxeoSection) doxeoSection.style.display = doxeoMatch ? 'flex' : 'none';
-        if (doxeoTitle) doxeoTitle.style.display = doxeoMatch ? '' : 'none';
-      }
-
-      // ocultar section titles de grids vacíos
+      // ocultar grids y sus títulos si están vacíos
       document.querySelectorAll('.grid').forEach(grid => {
-        const visible = [...grid.querySelectorAll('.pcard[data-name]')].some(c => !c.classList.contains('hidden'));
-        // buscar el section-title anterior
+        const visible = term === '' || [...grid.querySelectorAll('.pcard[data-name]')].some(c => !c.classList.contains('hidden'));
+        grid.style.display = visible ? '' : 'none';
         let prev = grid.previousElementSibling;
         while (prev && !prev.classList.contains('section-title')) prev = prev.previousElementSibling;
-        if (prev) prev.style.display = visible || term === '' ? '' : 'none';
-        grid.style.display = visible || term === '' ? '' : 'none';
+        if (prev) prev.style.display = visible ? '' : 'none';
       });
     }
     function scrollToCard(id) {
