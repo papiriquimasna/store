@@ -349,7 +349,7 @@
       top: 60px;
       height: calc(100vh - 60px);
       overflow-y: auto;
-      background: rgba(8,12,28,.85);
+      background: rgba(8,12,28,.92);
       border-right: 1px solid rgba(255,255,255,.07);
       backdrop-filter: blur(12px);
       padding: 1rem .75rem;
@@ -357,6 +357,7 @@
       flex-direction: column;
       gap: .4rem;
       z-index: 10;
+      transition: transform .3s ease;
     }
     .sidebar::-webkit-scrollbar { width: 3px; }
     .sidebar::-webkit-scrollbar-track { background: transparent; }
@@ -407,6 +408,34 @@
     }
     .sidebar-item .s-badge { display: none; }
 
+    /* Botón abrir sidebar móvil */
+    .sidebar-toggle {
+      display: none;
+      position: fixed;
+      bottom: 5rem;
+      left: 1rem;
+      z-index: 200;
+      background: rgba(8,12,28,.95);
+      border: 1px solid rgba(255,255,255,.15);
+      border-radius: 50%;
+      width: 44px; height: 44px;
+      align-items: center; justify-content: center;
+      cursor: pointer;
+      box-shadow: 0 4px 16px rgba(0,0,0,.5);
+      backdrop-filter: blur(8px);
+    }
+    .sidebar-toggle svg { color: rgba(255,255,255,.8); }
+
+    /* Overlay móvil */
+    .sidebar-overlay {
+      display: none;
+      position: fixed; inset: 0;
+      background: rgba(0,0,0,.6);
+      z-index: 149;
+      backdrop-filter: blur(2px);
+    }
+    .sidebar-overlay.active { display: block; }
+
     .main-content { flex: 1; min-width: 0; }
 
     /* SEARCH BAR TOP */
@@ -428,7 +457,17 @@
     .pcard.hidden { display: none !important; }
 
     @media (max-width: 900px) {
-      .sidebar { display: none; }
+      .sidebar {
+        position: fixed;
+        top: 0; left: 0;
+        height: 100vh;
+        width: 240px;
+        z-index: 150;
+        transform: translateX(-100%);
+        padding-top: 1.5rem;
+      }
+      .sidebar.open { transform: translateX(0); }
+      .sidebar-toggle { display: flex; }
       .search-bar-top { padding: 1rem 1rem .5rem; }
     }
     @media (max-width: 1100px) { .grid { grid-template-columns: repeat(3, minmax(0, 220px)); } }
@@ -465,8 +504,16 @@
 
   <div class="page-layout">
 
+    <!-- Overlay móvil -->
+    <div class="sidebar-overlay" id="sidebar-overlay" onclick="closeSidebar()"></div>
+
+    <!-- Botón toggle móvil -->
+    <button class="sidebar-toggle" onclick="toggleSidebar()" aria-label="Menú productos">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+    </button>
+
     <!-- SIDEBAR -->
-    <aside class="sidebar">
+    <aside class="sidebar" id="sidebar">
       <div class="sidebar-search">
         <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="11" cy="11" r="8"/><path d="M21 21l-4.35-4.35"/></svg>
         <input type="text" id="sidebar-search" placeholder="Buscar..." oninput="filterCards(this.value)">
@@ -1093,6 +1140,20 @@
 
   <canvas id="bg-canvas"></canvas>
   <script>
+    function toggleSidebar() {
+      const s = document.getElementById('sidebar');
+      const o = document.getElementById('sidebar-overlay');
+      const isOpen = s.classList.contains('open');
+      s.classList.toggle('open', !isOpen);
+      o.classList.toggle('active', !isOpen);
+      document.body.style.overflow = isOpen ? '' : 'hidden';
+    }
+    function closeSidebar() {
+      document.getElementById('sidebar').classList.remove('open');
+      document.getElementById('sidebar-overlay').classList.remove('active');
+      document.body.style.overflow = '';
+    }
+
     function filterCards(q) {
       const term = q.toLowerCase().trim();
       // sync both inputs
@@ -1105,8 +1166,11 @@
     function scrollToCard(id) {
       const el = document.getElementById('card-' + id);
       if (!el) return;
-      const top = el.getBoundingClientRect().top + window.scrollY - 80;
-      window.scrollTo({ top, behavior: 'smooth' });
+      closeSidebar();
+      setTimeout(() => {
+        const top = el.getBoundingClientRect().top + window.scrollY - 80;
+        window.scrollTo({ top, behavior: 'smooth' });
+      }, 300);
     }
 
     function openCanvaModal() {
