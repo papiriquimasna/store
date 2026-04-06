@@ -1440,11 +1440,34 @@
 
     function filterCards(q) {
       const term = q.toLowerCase().trim();
-      // sync both inputs
       document.querySelectorAll('#sidebar-search, .search-bar-top input').forEach(i => { if(i.value !== q) i.value = q; });
+
+      // filtrar cards dentro del grid
       document.querySelectorAll('.pcard[data-name]').forEach(card => {
         const name = card.dataset.name || '';
-        card.classList.toggle('hidden', term !== '' && !name.includes(term));
+        const match = term === '' || name.includes(term);
+        card.classList.toggle('hidden', !match);
+      });
+
+      // mostrar/ocultar card de doxeo (está fuera del grid)
+      const doxeo = document.getElementById('card-doxeo');
+      if (doxeo) {
+        const doxeoName = doxeo.dataset.name || '';
+        const doxeoMatch = term === '' || doxeoName.includes(term);
+        const doxeoSection = doxeo.closest('div[style*="justify-content:center"]');
+        const doxeoTitle = doxeoSection ? doxeoSection.previousElementSibling : null;
+        if (doxeoSection) doxeoSection.style.display = doxeoMatch ? 'flex' : 'none';
+        if (doxeoTitle) doxeoTitle.style.display = doxeoMatch ? '' : 'none';
+      }
+
+      // ocultar section titles de grids vacíos
+      document.querySelectorAll('.grid').forEach(grid => {
+        const visible = [...grid.querySelectorAll('.pcard[data-name]')].some(c => !c.classList.contains('hidden'));
+        // buscar el section-title anterior
+        let prev = grid.previousElementSibling;
+        while (prev && !prev.classList.contains('section-title')) prev = prev.previousElementSibling;
+        if (prev) prev.style.display = visible || term === '' ? '' : 'none';
+        grid.style.display = visible || term === '' ? '' : 'none';
       });
     }
     function scrollToCard(id) {
