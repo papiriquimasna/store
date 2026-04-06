@@ -335,7 +335,107 @@
     }
     .faq-item.open .faq-a { max-height: 120px; padding: 0 1.2rem 1rem; }
 
-    /* RESPONSIVE */
+    /* SIDEBAR */
+    .page-layout {
+      display: flex;
+      align-items: flex-start;
+      gap: 0;
+      position: relative;
+    }
+    .sidebar {
+      width: 220px;
+      flex-shrink: 0;
+      position: sticky;
+      top: 60px;
+      height: calc(100vh - 60px);
+      overflow-y: auto;
+      background: rgba(8,12,28,.85);
+      border-right: 1px solid rgba(255,255,255,.07);
+      backdrop-filter: blur(12px);
+      padding: 1rem .75rem;
+      display: flex;
+      flex-direction: column;
+      gap: .4rem;
+      z-index: 10;
+    }
+    .sidebar::-webkit-scrollbar { width: 3px; }
+    .sidebar::-webkit-scrollbar-track { background: transparent; }
+    .sidebar::-webkit-scrollbar-thumb { background: rgba(255,255,255,.1); border-radius: 4px; }
+
+    .sidebar-search {
+      display: flex; align-items: center; gap: .5rem;
+      background: rgba(255,255,255,.05);
+      border: 1px solid rgba(255,255,255,.1);
+      border-radius: 8px;
+      padding: .45rem .65rem;
+      margin-bottom: .4rem;
+    }
+    .sidebar-search input {
+      background: none; border: none; outline: none;
+      color: #fff; font-family: 'Outfit', sans-serif;
+      font-size: .72rem; width: 100%;
+    }
+    .sidebar-search input::placeholder { color: rgba(255,255,255,.3); }
+    .sidebar-search svg { flex-shrink: 0; opacity: .4; }
+
+    .sidebar-label {
+      font-size: .58rem; font-weight: 800;
+      letter-spacing: .16em; text-transform: uppercase;
+      color: rgba(255,255,255,.3);
+      padding: .5rem .3rem .2rem;
+    }
+    .sidebar-item {
+      display: flex; align-items: center; gap: .55rem;
+      padding: .45rem .6rem;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: background .18s;
+      text-decoration: none;
+      border: 1px solid transparent;
+    }
+    .sidebar-item:hover { background: rgba(255,255,255,.06); }
+    .sidebar-item.active { background: rgba(255,255,255,.08); border-color: rgba(255,255,255,.1); }
+    .sidebar-item img {
+      width: 22px; height: 22px; border-radius: 6px;
+      object-fit: cover; flex-shrink: 0;
+    }
+    .sidebar-item span {
+      font-size: .72rem; font-weight: 600;
+      color: rgba(255,255,255,.75);
+      white-space: nowrap; overflow: hidden;
+      text-overflow: ellipsis;
+    }
+    .sidebar-item .s-badge {
+      margin-left: auto; flex-shrink: 0;
+      font-size: .48rem; font-weight: 900;
+      padding: .12rem .35rem; border-radius: 3px;
+      letter-spacing: .06em; text-transform: uppercase;
+    }
+
+    .main-content { flex: 1; min-width: 0; }
+
+    /* SEARCH BAR TOP */
+    .search-bar-top {
+      display: flex; align-items: center; gap: .75rem;
+      padding: 1.5rem 2rem .5rem;
+    }
+    .search-bar-top input {
+      flex: 1; background: rgba(255,255,255,.05);
+      border: 1px solid rgba(255,255,255,.1);
+      border-radius: 10px; padding: .6rem 1rem;
+      color: #fff; font-family: 'Outfit', sans-serif;
+      font-size: .82rem; outline: none;
+      transition: border-color .2s;
+    }
+    .search-bar-top input:focus { border-color: rgba(96,165,250,.4); }
+    .search-bar-top input::placeholder { color: rgba(255,255,255,.3); }
+
+    .pcard.hidden { display: none !important; }
+
+    @media (max-width: 900px) {
+      .sidebar { display: none; }
+      .search-bar-top { padding: 1rem 1rem .5rem; }
+    }
     @media (max-width: 1100px) { .grid { grid-template-columns: repeat(3, minmax(0, 220px)); } }
     @media (max-width: 750px) {
       .grid { grid-template-columns: repeat(2, minmax(0, 220px)); padding: 0 1rem 2rem; }
@@ -367,10 +467,81 @@
   </section>
 
   <p class="section-title" id="productos">Elige tu plataforma</p>
+
+  <div class="page-layout">
+
+    <!-- SIDEBAR -->
+    <aside class="sidebar">
+      <div class="sidebar-search">
+        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="11" cy="11" r="8"/><path d="M21 21l-4.35-4.35"/></svg>
+        <input type="text" id="sidebar-search" placeholder="Buscar..." oninput="filterCards(this.value)">
+      </div>
+
+      <p class="sidebar-label">Streaming</p>
+      <a class="sidebar-item" onclick="scrollToCard('crunchyroll')">
+        <img src="images/Crunchyroll_logo_.webp" alt="">
+        <span>Crunchyroll</span>
+        <span class="s-badge" style="background:#f97316;color:#fff;">1 mes</span>
+      </a>
+      <a class="sidebar-item" onclick="scrollToCard('disney')">
+        <img src="images/disney_logo.png" alt="">
+        <span>Disney+</span>
+        <span class="s-badge" style="background:#1a6fff;color:#fff;">1 mes</span>
+      </a>
+      <a class="sidebar-item" onclick="scrollToCard('hbo')">
+        <img src="images/hbomax_logo.jpg" alt="">
+        <span>HBO Max</span>
+        <span class="s-badge" style="background:#7c3aed;color:#fff;">1 mes</span>
+      </a>
+      <a class="sidebar-item" onclick="scrollToCard('paramount')">
+        <img src="images/apps.35768.9007199266243596.ad78eadf-f174-4f68-8c73-562e5c227afa.png" alt="">
+        <span>Paramount+</span>
+        <span class="s-badge" style="background:#2563eb;color:#fff;">1 mes</span>
+      </a>
+      <a class="sidebar-item" onclick="scrollToCard('vix')">
+        <img src="images/vix_logo.jpg" alt="">
+        <span>VIX</span>
+        <span class="s-badge" style="background:#ff6600;color:#fff;">1 mes</span>
+      </a>
+
+      <p class="sidebar-label">Creatividad</p>
+      <a class="sidebar-item" onclick="scrollToCard('canva')">
+        <img src="images/canva_Logo.png" alt="">
+        <span>Canva Pro EDU</span>
+        <span class="s-badge" style="background:#7d2ae8;color:#fff;">3 planes</span>
+      </a>
+      <a class="sidebar-item" onclick="scrollToCard('capcut')">
+        <img src="images/capcut_logo.png" alt="" style="background:#000;padding:2px;">
+        <span>CapCut Pro</span>
+        <span class="s-badge" style="background:#00d4ff;color:#000;">1 mes</span>
+      </a>
+
+      <p class="sidebar-label">Discord</p>
+      <a class="sidebar-item" onclick="scrollToCard('nitro')">
+        <img src="images/nitro_logo.jpg" alt="">
+        <span>Discord Nitro</span>
+        <span class="s-badge" style="background:#5865f2;color:#fff;">3 meses</span>
+      </a>
+
+      <p class="sidebar-label">APKs</p>
+      <a class="sidebar-item" onclick="scrollToCard('duolingo')">
+        <img src="images/duolingo_logo.png" alt="" style="background:#fff;padding:2px;">
+        <span>Duolingo MOD</span>
+        <span class="s-badge" style="background:#58cc02;color:#fff;">PRO</span>
+      </a>
+    </aside>
+
+    <!-- MAIN -->
+    <div class="main-content">
+
+      <!-- Buscador top -->
+      <div class="search-bar-top">
+        <input type="text" placeholder="🔍  Buscar producto..." oninput="filterCards(this.value)">
+      </div>
   <div class="grid">
 
     <!-- Crunchyroll -->
-    <div class="pcard pcard--full" style="border-color:#f97316;box-shadow:0 0 8px rgba(249,115,22,.6),0 0 20px rgba(249,115,22,.25)">
+    <div id="card-crunchyroll" data-name="crunchyroll" class="pcard pcard--full" style="border-color:#f97316;box-shadow:0 0 8px rgba(249,115,22,.6),0 0 20px rgba(249,115,22,.25)">
       <div class="pcard-bg">
         <div class="ribbon">Más vendido</div>
         <div class="pcard-brand-circle">
@@ -396,7 +567,7 @@
     </div>
 
     <!-- Disney+ -->
-    <div class="pcard pcard--full" style="border-color:#1a6fff;box-shadow:0 0 8px rgba(26,111,255,.6),0 0 20px rgba(26,111,255,.25)">
+    <div id="card-disney" data-name="disney disney+" class="pcard pcard--full" style="border-color:#1a6fff;box-shadow:0 0 8px rgba(26,111,255,.6),0 0 20px rgba(26,111,255,.25)">
       <div class="pcard-bg" style="background: url('images/disney_fondo.png') center center / cover no-repeat;">
         <div class="pcard-brand-circle" style="background:#00172d;">
           <img src="images/disney_logo.png" alt="Disney+" style="width:100%;height:100%;object-fit:cover;border-radius:50%;">
@@ -423,7 +594,7 @@
     </div>
 
     <!-- HBO Max -->
-    <div class="pcard pcard--full" style="border-color:#7c3aed;box-shadow:0 0 8px rgba(124,58,237,.6),0 0 20px rgba(124,58,237,.25)">
+    <div id="card-hbo" data-name="hbo max hbomax" class="pcard pcard--full" style="border-color:#7c3aed;box-shadow:0 0 8px rgba(124,58,237,.6),0 0 20px rgba(124,58,237,.25)">
       <div class="pcard-bg pcard-bg--img" style="background-color:#1a0030;">
         <img src="images/hbomax_fondo.png" alt="" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center;z-index:0;">
         <div class="pcard-brand-circle" style="background:#000;">
@@ -451,7 +622,7 @@
     </div>
 
     <!-- Paramount+ -->
-    <div class="pcard pcard--full" style="border-color:#2563eb;box-shadow:0 0 8px rgba(37,99,235,.6),0 0 20px rgba(37,99,235,.25)">
+    <div id="card-paramount" data-name="paramount paramount+" class="pcard pcard--full" style="border-color:#2563eb;box-shadow:0 0 8px rgba(37,99,235,.6),0 0 20px rgba(37,99,235,.25)">
       <div class="pcard-bg" style="background: url('images/paramount-plus-logo-hero.png') center center / cover no-repeat; background-color:#0064ff;">
         <div class="pcard-brand-circle" style="background:#0064ff;">
           <img src="images/apps.35768.9007199266243596.ad78eadf-f174-4f68-8c73-562e5c227afa.png" alt="Paramount+">
@@ -478,7 +649,7 @@
     </div>
 
     <!-- VIX -->
-    <div class="pcard pcard--full" style="border-color:#ff6600;box-shadow:0 0 8px rgba(255,102,0,.6),0 0 20px rgba(255,102,0,.25)">
+    <div id="card-vix" data-name="vix" class="pcard pcard--full" style="border-color:#ff6600;box-shadow:0 0 8px rgba(255,102,0,.6),0 0 20px rgba(255,102,0,.25)">
       <div class="pcard-bg" style="background: url('images/VIX-CINE-TV.jpg') center center / cover no-repeat;">
         <div class="pcard-brand-circle" style="background:#ff6600;">
           <img src="images/vix_logo.jpg" alt="VIX">
@@ -503,7 +674,7 @@
     </div>
 
     <!-- Canva Pro -->
-    <div class="pcard pcard--full" onclick="openCanvaModal()" style="border-color:#7d2ae8;box-shadow:0 0 6px rgba(125,42,232,.4);cursor:pointer;">
+    <div id="card-canva" data-name="canva canva pro edu" class="pcard pcard--full" onclick="openCanvaModal()" style="border-color:#7d2ae8;box-shadow:0 0 6px rgba(125,42,232,.4);cursor:pointer;">
       <div class="pcard-bg" style="background: url('images/canva_fondo.png') center center / cover no-repeat;">
         <div class="pcard-brand-circle" style="background:#7d2ae8;">
           <img src="images/canva_Logo.png" alt="Canva" style="width:100%;height:100%;object-fit:cover;">
@@ -530,7 +701,7 @@
     </div>
 
     <!-- CapCut Pro -->
-    <div class="pcard pcard--full" style="border-color:#00d4ff;box-shadow:0 0 8px rgba(0,212,255,.6),0 0 20px rgba(0,212,255,.25)">
+    <div id="card-capcut" data-name="capcut capcut pro" class="pcard pcard--full" style="border-color:#00d4ff;box-shadow:0 0 8px rgba(0,212,255,.6),0 0 20px rgba(0,212,255,.25)">
       <div class="pcard-bg" style="background: url('images/capcut_fondo.jpg') center center / cover no-repeat;">
         <div class="pcard-brand-circle" style="background:#000;">
           <img src="images/capcut_logo.png" alt="CapCut" style="width:100%;height:100%;object-fit:contain;padding:4px;">
@@ -557,7 +728,7 @@
     </div>
 
     <!-- Discord Nitro -->
-    <div class="pcard pcard--full" onclick="openNitroModal()" style="border-color:#5865f2;box-shadow:0 0 8px rgba(88,101,242,.6),0 0 20px rgba(88,101,242,.25);cursor:pointer;">
+    <div id="card-nitro" data-name="discord nitro boost" class="pcard pcard--full" onclick="openNitroModal()" style="border-color:#5865f2;box-shadow:0 0 8px rgba(88,101,242,.6),0 0 20px rgba(88,101,242,.25);cursor:pointer;">
       <div class="pcard-bg" style="background: url('images/nitro_fondo.png') center center / cover no-repeat; background-color:#23272a;">
         <div class="pcard-brand-circle" style="background:#23272a;">
           <img src="images/nitro_logo.jpg" alt="Discord Nitro" style="width:100%;height:100%;object-fit:cover;">
@@ -682,7 +853,7 @@
         <img src="images/canva_Logo.png" alt="Canva" style="width:38px;height:38px;border-radius:9px;object-fit:contain;background:#fff;padding:4px;flex-shrink:0;box-shadow:0 2px 8px rgba(0,0,0,.3);">
         <div style="flex:1;">
           <p style="font-size:.9rem;font-weight:900;color:#fff;">Canva Pro EDU</p>
-          <p style="font-size:.65rem;color:rgba(255,255,255,.7);margin-top:.1rem;">Elige el plan que más te convenga 👇</p>
+          <p style="font-size:.65rem;color:rgba(255,255,255,.7);margin-top:.1rem;">Elige el plan que más te convenga </p>
         </div>
         <button onclick="closeCanvaModal()" style="background:rgba(0,0,0,.2);border:none;color:rgba(255,255,255,.8);width:26px;height:26px;border-radius:50%;cursor:pointer;font-size:.85rem;display:flex;align-items:center;justify-content:center;flex-shrink:0;" onmouseover="this.style.background='rgba(0,0,0,.45)'" onmouseout="this.style.background='rgba(0,0,0,.2)'">✕</button>
       </div>
@@ -803,7 +974,7 @@
   <div class="grid">
 
     <!-- APK 1 - Duolingo -->
-    <div class="pcard pcard--full" onclick="openDuoModal()" style="border-color:#58cc02;box-shadow:0 0 8px rgba(88,204,2,.5),0 0 20px rgba(88,204,2,.2);cursor:pointer;">
+    <div id="card-duolingo" data-name="duolingo apk mod premium" class="pcard pcard--full" onclick="openDuoModal()" style="border-color:#58cc02;box-shadow:0 0 8px rgba(88,204,2,.5),0 0 20px rgba(88,204,2,.2);cursor:pointer;">
       <div class="pcard-bg" style="background: url('images/duolingo_fondo.jpg') center center / cover no-repeat; background-color:#1a2e00;">
         <div class="pcard-brand-circle" style="background:#fff;">
           <img src="images/duolingo_logo.png" alt="Duolingo" style="width:100%;height:100%;object-fit:contain;padding:4px;">
@@ -873,6 +1044,9 @@
 
   </div>
 
+    </div><!-- end main-content -->
+  </div><!-- end page-layout -->
+
   <!-- FAQ -->
   <section class="faq">
     <p class="section-title">Preguntas frecuentes</p>
@@ -924,6 +1098,20 @@
 
   <canvas id="bg-canvas"></canvas>
   <script>
+    function filterCards(q) {
+      const term = q.toLowerCase().trim();
+      // sync both inputs
+      document.querySelectorAll('#sidebar-search, .search-bar-top input').forEach(i => { if(i.value !== q) i.value = q; });
+      document.querySelectorAll('.pcard[data-name]').forEach(card => {
+        const name = card.dataset.name || '';
+        card.classList.toggle('hidden', term !== '' && !name.includes(term));
+      });
+    }
+    function scrollToCard(id) {
+      const el = document.getElementById('card-' + id);
+      if (el) el.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    }
+
     function openCanvaModal() {
       document.getElementById('canva-modal').style.display = 'flex';
       document.body.style.overflow = 'hidden';
