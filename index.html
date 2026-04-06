@@ -565,6 +565,12 @@
         <span>Avira VPN</span>
       </a>
 
+      <p class="sidebar-label">IA</p>
+      <a class="sidebar-item" onclick="scrollToCard('chatgpt')">
+        <img src="images/chatgpt_logo.jpg" alt="">
+        <span>ChatGPT Pro</span>
+      </a>
+
       <p class="sidebar-label">Creatividad</p>
       <a class="sidebar-item" onclick="scrollToCard('canva')">
         <img src="images/canva_Logo.png" alt="">
@@ -801,6 +807,33 @@
       </div>
     </div>
 
+    <!-- ChatGPT -->
+    <div id="card-chatgpt" data-name="chatgpt chat gpt ia premium" class="pcard pcard--full" onclick="openChatGPTModal()" style="border-color:#10a37f;box-shadow:0 0 8px rgba(16,163,127,.5),0 0 20px rgba(16,163,127,.2);cursor:pointer;">
+      <div class="pcard-bg" style="background: url('images/chatgpt_fondo.png') center center / cover no-repeat; background-color:#0d1117;">
+        <div class="pcard-brand-circle" style="background:#0d1117;">
+          <img src="images/chatgpt_logo.jpg" alt="ChatGPT" style="width:100%;height:100%;object-fit:cover;">
+        </div>
+      </div>
+      <div class="pcard-content">
+        <p class="pcard-title">
+          <span style="background:#0d1117;width:20px;height:20px;border-radius:5px;flex-shrink:0;overflow:hidden;display:inline-flex;align-items:center;justify-content:center;">
+            <img src="images/chatgpt_logo.jpg" alt="ChatGPT" style="width:100%;height:100%;object-fit:cover;">
+          </span>
+          ChatGPT 5.2 Pro · 1 mes
+          <span style="background:#10a37f;color:#fff;font-size:.5rem;font-weight:900;padding:.15rem .4rem;border-radius:4px;letter-spacing:.08em;margin-left:.2rem;">PRO</span>
+        </p>
+        <p style="font-size:.62rem;color:rgba(255,255,255,.4);margin-top:-.1rem;">Activacion a correo · Acceso completo</p>
+        <p class="pcard-price" style="display:flex;align-items:center;gap:.4rem;color:#10a37f;">
+          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#10a37f" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+          S/ 15.00 <span class="pcard-period">/ mes</span>
+        </p>
+        <p class="pcard-duration">Duracion: 1 mes</p>
+      </div>
+      <div class="pcard-btn--wrapper">
+        <button class="pcard-btn--inner" onclick="event.stopPropagation();openChatGPTModal()" style="width:100%;cursor:pointer;border:none;">Comprar ahora</button>
+      </div>
+    </div>
+
     <!-- Canva Pro -->
     <div id="card-canva" data-name="canva canva pro edu" class="pcard pcard--full" onclick="openCanvaModal()" style="border-color:#7d2ae8;box-shadow:0 0 6px rgba(125,42,232,.4);cursor:pointer;">
       <div class="pcard-bg" style="background: url('images/canva_fondo.jpg') center center / cover no-repeat;">
@@ -966,6 +999,76 @@
       <div style="padding:.85rem 1.2rem 1.1rem;display:flex;gap:.6rem;flex-shrink:0;border-top:1px solid rgba(255,255,255,.06);">
         <button onclick="closeNitroModal()" style="flex:1;padding:.7rem;border-radius:10px;border:1px solid rgba(255,255,255,.1);background:transparent;color:rgba(255,255,255,.45);font-size:.74rem;font-weight:700;cursor:pointer;font-family:'Outfit',sans-serif;transition:border-color .2s,color .2s;" onmouseover="this.style.color='rgba(255,255,255,.8)'" onmouseout="this.style.color='rgba(255,255,255,.45)'">Cancelar</button>
         <a id="nitro-buy-btn" href="https://wa.me/51926819469?text=DESEO%20ADQUIRIR%20DISCORD%20NITRO%20%2B%202%20MEJORAS%20POR%203%20MESES" target="_blank" rel="noopener" onclick="return checkNitroBuy(event)" style="flex:2;padding:.7rem;border-radius:10px;background:rgba(88,101,242,.3);color:rgba(255,255,255,.35);font-size:.74rem;font-weight:900;text-decoration:none;text-align:center;letter-spacing:.05em;text-transform:uppercase;display:flex;align-items:center;justify-content:center;gap:.4rem;cursor:not-allowed;transition:all .3s;pointer-events:none;">Comprar ahora</a>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- MODAL CHATGPT -->
+  <div id="chatgpt-modal" style="display:none;position:fixed;inset:0;z-index:9999;align-items:center;justify-content:center;padding:1rem;">
+    <div onclick="closeChatGPTModal()" style="position:absolute;inset:0;background:rgba(0,0,0,.8);backdrop-filter:blur(8px);"></div>
+    <div style="position:relative;z-index:1;background:#0e1021;border:1.5px solid rgba(16,163,127,.35);border-radius:20px;max-width:420px;width:100%;box-shadow:0 0 60px rgba(16,163,127,.15),0 24px 64px rgba(0,0,0,.7);display:flex;flex-direction:column;max-height:90vh;">
+
+      <!-- Header -->
+      <div style="background:linear-gradient(135deg,#0a6b52,#10a37f);padding:1rem 1.2rem;border-radius:18px 18px 0 0;display:flex;align-items:center;gap:.75rem;flex-shrink:0;">
+        <img src="images/chatgpt_logo.jpg" alt="ChatGPT" style="width:38px;height:38px;border-radius:9px;object-fit:cover;flex-shrink:0;box-shadow:0 2px 8px rgba(0,0,0,.3);">
+        <div style="flex:1;">
+          <p style="font-size:.9rem;font-weight:900;color:#fff;">ChatGPT 5.2 Pro</p>
+          <p style="font-size:.65rem;color:rgba(255,255,255,.7);margin-top:.1rem;">1 mes · Activacion a correo · S/ 15.00</p>
+        </div>
+        <button onclick="closeChatGPTModal()" style="background:rgba(0,0,0,.2);border:none;color:rgba(255,255,255,.8);width:26px;height:26px;border-radius:50%;cursor:pointer;font-size:.85rem;display:flex;align-items:center;justify-content:center;flex-shrink:0;" onmouseover="this.style.background='rgba(0,0,0,.45)'" onmouseout="this.style.background='rgba(0,0,0,.2)'">✕</button>
+      </div>
+
+      <!-- Body -->
+      <div style="overflow-y:auto;padding:1.1rem 1.2rem;display:flex;flex-direction:column;gap:.9rem;flex:1;">
+
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:.5rem;">
+          <div style="background:rgba(16,163,127,.07);border:1px solid rgba(16,163,127,.18);border-radius:10px;padding:.65rem .8rem;">
+            <p style="font-size:.62rem;color:rgba(255,255,255,.45);margin-bottom:.2rem;">Duracion</p>
+            <p style="font-size:.8rem;font-weight:800;color:#fff;">1 mes</p>
+          </div>
+          <div style="background:rgba(16,163,127,.07);border:1px solid rgba(16,163,127,.18);border-radius:10px;padding:.65rem .8rem;">
+            <p style="font-size:.62rem;color:rgba(255,255,255,.45);margin-bottom:.2rem;">Activacion</p>
+            <p style="font-size:.8rem;font-weight:800;color:#fff;">A tu correo</p>
+          </div>
+          <div style="background:rgba(16,163,127,.07);border:1px solid rgba(16,163,127,.18);border-radius:10px;padding:.65rem .8rem;">
+            <p style="font-size:.62rem;color:rgba(255,255,255,.45);margin-bottom:.2rem;">Version</p>
+            <p style="font-size:.8rem;font-weight:800;color:#fff;">ChatGPT 5.2</p>
+          </div>
+          <div style="background:rgba(16,163,127,.07);border:1px solid rgba(16,163,127,.18);border-radius:10px;padding:.65rem .8rem;">
+            <p style="font-size:.62rem;color:rgba(255,255,255,.45);margin-bottom:.2rem;">Plan</p>
+            <p style="font-size:.8rem;font-weight:800;color:#fff;">Pro</p>
+          </div>
+        </div>
+
+        <div>
+          <p style="font-size:.65rem;font-weight:800;color:#10a37f;letter-spacing:.12em;text-transform:uppercase;margin-bottom:.5rem;">Como funciona</p>
+          <div style="display:flex;flex-direction:column;gap:.35rem;">
+            <div style="display:flex;align-items:flex-start;gap:.6rem;">
+              <span style="background:#10a37f;color:#fff;font-size:.6rem;font-weight:900;width:18px;height:18px;border-radius:50%;display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:.1rem;">1</span>
+              <p style="font-size:.76rem;color:rgba(255,255,255,.8);line-height:1.55;">Realizas el pago y me envias tu correo.</p>
+            </div>
+            <div style="display:flex;align-items:flex-start;gap:.6rem;">
+              <span style="background:#10a37f;color:#fff;font-size:.6rem;font-weight:900;width:18px;height:18px;border-radius:50%;display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:.1rem;">2</span>
+              <p style="font-size:.76rem;color:rgba(255,255,255,.8);line-height:1.55;">Activo el plan Pro en tu cuenta de ChatGPT.</p>
+            </div>
+            <div style="display:flex;align-items:flex-start;gap:.6rem;">
+              <span style="background:#10a37f;color:#fff;font-size:.6rem;font-weight:900;width:18px;height:18px;border-radius:50%;display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:.1rem;">3</span>
+              <p style="font-size:.76rem;color:rgba(255,255,255,.8);line-height:1.55;">Listo, acceso inmediato por 1 mes completo.</p>
+            </div>
+          </div>
+        </div>
+
+        <div style="background:rgba(16,163,127,.06);border:1px solid rgba(16,163,127,.18);border-radius:12px;padding:.8rem 1rem;">
+          <p style="font-size:.76rem;color:rgba(255,255,255,.7);line-height:1.6;">WhatsApp: <strong style="color:#10a37f;">+51 926819469</strong></p>
+        </div>
+
+      </div>
+
+      <!-- Footer -->
+      <div style="padding:.85rem 1.2rem 1.1rem;display:flex;gap:.6rem;flex-shrink:0;border-top:1px solid rgba(255,255,255,.06);">
+        <button onclick="closeChatGPTModal()" style="flex:1;padding:.7rem;border-radius:10px;border:1px solid rgba(255,255,255,.1);background:transparent;color:rgba(255,255,255,.45);font-size:.74rem;font-weight:700;cursor:pointer;font-family:'Outfit',sans-serif;" onmouseover="this.style.color='rgba(255,255,255,.8)'" onmouseout="this.style.color='rgba(255,255,255,.45)'">Cancelar</button>
+        <a href="https://wa.me/51926819469?text=QUIERO%20ADQUIRIR%20CHATGPT%205.2%20PRO%20X%201%20MES" target="_blank" rel="noopener" style="flex:2;padding:.7rem;border-radius:10px;background:linear-gradient(135deg,#0a6b52,#10a37f);color:#fff;font-size:.74rem;font-weight:900;text-decoration:none;text-align:center;letter-spacing:.05em;text-transform:uppercase;display:flex;align-items:center;justify-content:center;box-shadow:0 4px 20px rgba(16,163,127,.35);">Comprar ahora</a>
       </div>
 
     </div>
@@ -1524,6 +1627,15 @@
       document.body.style.overflow = '';
     }
 
+    function openChatGPTModal() {
+      document.getElementById('chatgpt-modal').style.display = 'flex';
+      document.body.style.overflow = 'hidden';
+    }
+    function closeChatGPTModal() {
+      document.getElementById('chatgpt-modal').style.display = 'none';
+      document.body.style.overflow = '';
+    }
+
     function openCrunchyModal() {
       document.getElementById('crunchy-modal').style.display = 'flex';
       document.body.style.overflow = 'hidden';
@@ -1696,7 +1808,7 @@
         e.preventDefault(); return false;
       }
     }
-    document.addEventListener('keydown', e => { if(e.key === 'Escape') { closeNitroModal(); closeDuoModal(); closeCanvaModal(); closeSurfModal(); closeCrunchyModal(); closeAviraModal(); closeDoxeoModal(); closePerplexityModal(); } });
+    document.addEventListener('keydown', e => { if(e.key === 'Escape') { closeNitroModal(); closeDuoModal(); closeCanvaModal(); closeSurfModal(); closeCrunchyModal(); closeAviraModal(); closeDoxeoModal(); closePerplexityModal(); closeChatGPTModal(); } });
 
     function toggleFaq(btn) {
       const item = btn.parentElement;
