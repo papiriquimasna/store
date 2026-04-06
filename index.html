@@ -587,7 +587,7 @@
   <div class="grid">
 
     <!-- Crunchyroll -->
-    <div id="card-crunchyroll" data-name="crunchyroll" class="pcard pcard--full" style="border-color:#f97316;box-shadow:0 0 8px rgba(249,115,22,.6),0 0 20px rgba(249,115,22,.25)">
+    <div id="card-crunchyroll" data-name="crunchyroll" class="pcard pcard--full" onclick="openCrunchyModal()" style="border-color:#f97316;box-shadow:0 0 8px rgba(249,115,22,.6),0 0 20px rgba(249,115,22,.25);cursor:pointer;">
       <div class="pcard-bg">
         <div class="ribbon">Más vendido</div>
         <div class="pcard-brand-circle">
@@ -597,18 +597,18 @@
       <div class="pcard-content">
         <p class="pcard-title">
           <img src="images/Crunchyroll_logo_.webp" alt="Crunchyroll" style="width:20px;height:20px;border-radius:5px;object-fit:cover;flex-shrink:0;">
-          Crunchyroll · Perfil x 1 mes
+          Crunchyroll · Perfil
           <span style="background:#f97316;color:#fff;font-size:.5rem;font-weight:900;padding:.15rem .4rem;border-radius:4px;letter-spacing:.08em;margin-left:.2rem;">PREMIUM</span>
         </p>
         <p style="font-size:.62rem;color:rgba(255,255,255,.4);margin-top:-.1rem;">Sin anuncios · Full HD · perfil personal</p>
         <p class="pcard-price" style="display:flex;align-items:center;gap:.4rem;color:#f97316;">
           <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#f97316" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
-          S/ 4.00 <span class="pcard-period">/ mes</span>
+          Desde S/ 4.00 <span class="pcard-period">· 2 planes</span>
         </p>
-        <p class="pcard-duration">Duración: 1 mes</p>
+        <p class="pcard-duration">Elige tu plan</p>
       </div>
       <div class="pcard-btn--wrapper">
-        <a class="pcard-btn--inner" href="https://wa.me/51926819469?text=QUIERO%20ADQUIRIR%20UN%20PERFIL%20DE%20CRUNCHYROLL%20POR%2030%20DIAS" target="_blank" rel="noopener">Comprar ahora</a>
+        <button class="pcard-btn--inner" onclick="event.stopPropagation();openCrunchyModal()" style="width:100%;cursor:pointer;border:none;">Comprar ahora</button>
       </div>
     </div>
 
@@ -911,6 +911,54 @@
       <div style="padding:.85rem 1.2rem 1.1rem;display:flex;gap:.6rem;flex-shrink:0;border-top:1px solid rgba(255,255,255,.06);">
         <button onclick="closeNitroModal()" style="flex:1;padding:.7rem;border-radius:10px;border:1px solid rgba(255,255,255,.1);background:transparent;color:rgba(255,255,255,.45);font-size:.74rem;font-weight:700;cursor:pointer;font-family:'Outfit',sans-serif;transition:border-color .2s,color .2s;" onmouseover="this.style.color='rgba(255,255,255,.8)'" onmouseout="this.style.color='rgba(255,255,255,.45)'">Cancelar</button>
         <a id="nitro-buy-btn" href="https://wa.me/51926819469?text=DESEO%20ADQUIRIR%20DISCORD%20NITRO%20%2B%202%20MEJORAS%20POR%203%20MESES" target="_blank" rel="noopener" onclick="return checkNitroBuy(event)" style="flex:2;padding:.7rem;border-radius:10px;background:rgba(88,101,242,.3);color:rgba(255,255,255,.35);font-size:.74rem;font-weight:900;text-decoration:none;text-align:center;letter-spacing:.05em;text-transform:uppercase;display:flex;align-items:center;justify-content:center;gap:.4rem;cursor:not-allowed;transition:all .3s;pointer-events:none;">Comprar ahora</a>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- MODAL CRUNCHYROLL -->
+  <div id="crunchy-modal" style="display:none;position:fixed;inset:0;z-index:9999;align-items:center;justify-content:center;padding:1rem;">
+    <div onclick="closeCrunchyModal()" style="position:absolute;inset:0;background:rgba(0,0,0,.8);backdrop-filter:blur(8px);"></div>
+    <div style="position:relative;z-index:1;background:#0e1021;border:1.5px solid rgba(249,115,22,.4);border-radius:20px;max-width:420px;width:100%;box-shadow:0 0 60px rgba(249,115,22,.15),0 24px 64px rgba(0,0,0,.7);display:flex;flex-direction:column;">
+
+      <!-- Header -->
+      <div style="background:linear-gradient(135deg,#c2500a,#f97316);padding:1rem 1.2rem;border-radius:18px 18px 0 0;display:flex;align-items:center;gap:.75rem;flex-shrink:0;">
+        <img src="images/Crunchyroll_logo_.webp" alt="Crunchyroll" style="width:38px;height:38px;border-radius:9px;object-fit:cover;flex-shrink:0;box-shadow:0 2px 8px rgba(0,0,0,.3);">
+        <div style="flex:1;">
+          <p style="font-size:.9rem;font-weight:900;color:#fff;">Crunchyroll Premium</p>
+          <p style="font-size:.65rem;color:rgba(255,255,255,.7);margin-top:.1rem;">Elige el plan que más te convenga 👇</p>
+        </div>
+        <button onclick="closeCrunchyModal()" style="background:rgba(0,0,0,.2);border:none;color:rgba(255,255,255,.8);width:26px;height:26px;border-radius:50%;cursor:pointer;font-size:.85rem;display:flex;align-items:center;justify-content:center;flex-shrink:0;" onmouseover="this.style.background='rgba(0,0,0,.45)'" onmouseout="this.style.background='rgba(0,0,0,.2)'">✕</button>
+      </div>
+
+      <!-- Planes -->
+      <div style="padding:1.1rem 1.2rem;display:flex;flex-direction:column;gap:.7rem;">
+        <p style="font-size:.65rem;font-weight:800;color:#f97316;letter-spacing:.14em;text-transform:uppercase;">Selecciona un plan</p>
+
+        <div onclick="selectCrunchyPlan(this,'1 MES','4.00','QUIERO%20ADQUIRIR%20UN%20PERFIL%20DE%20CRUNCHYROLL%20POR%201%20MES')" class="crunchy-plan" style="display:flex;align-items:center;justify-content:space-between;background:rgba(249,115,22,.08);border:1.5px solid rgba(249,115,22,.25);border-radius:12px;padding:.85rem 1rem;cursor:pointer;transition:all .2s;">
+          <div>
+            <p style="font-size:.8rem;font-weight:800;color:#fff;">Crunchyroll · 1 mes</p>
+            <p style="font-size:.68rem;color:rgba(255,255,255,.5);margin-top:.15rem;">Perfil personal · Sin anuncios · Full HD</p>
+          </div>
+          <p style="font-size:.95rem;font-weight:900;color:#f97316;flex-shrink:0;margin-left:.5rem;">S/ 4.00</p>
+        </div>
+
+        <div onclick="selectCrunchyPlan(this,'6 MESES','21.00','QUIERO%20ADQUIRIR%20UN%20PERFIL%20DE%20CRUNCHYROLL%20POR%206%20MESES')" class="crunchy-plan" style="display:flex;align-items:center;justify-content:space-between;background:rgba(249,115,22,.08);border:1.5px solid rgba(249,115,22,.25);border-radius:12px;padding:.85rem 1rem;cursor:pointer;transition:all .2s;">
+          <div>
+            <p style="font-size:.8rem;font-weight:800;color:#fff;">Crunchyroll · 6 meses</p>
+            <p style="font-size:.68rem;color:rgba(255,255,255,.5);margin-top:.15rem;">Perfil personal · Sin anuncios · Full HD</p>
+          </div>
+          <div style="display:flex;flex-direction:column;align-items:flex-end;flex-shrink:0;margin-left:.5rem;">
+            <span style="background:#f97316;color:#fff;font-size:.48rem;font-weight:900;padding:.15rem .4rem;border-radius:4px;letter-spacing:.06em;margin-bottom:.2rem;">MEJOR PRECIO</span>
+            <p style="font-size:.95rem;font-weight:900;color:#f97316;">S/ 21.00</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Footer -->
+      <div style="padding:.85rem 1.2rem 1.1rem;display:flex;gap:.6rem;flex-shrink:0;border-top:1px solid rgba(255,255,255,.06);">
+        <button onclick="closeCrunchyModal()" style="flex:1;padding:.7rem;border-radius:10px;border:1px solid rgba(255,255,255,.1);background:transparent;color:rgba(255,255,255,.45);font-size:.74rem;font-weight:700;cursor:pointer;font-family:'Outfit',sans-serif;" onmouseover="this.style.color='rgba(255,255,255,.8)'" onmouseout="this.style.color='rgba(255,255,255,.45)'">Cancelar</button>
+        <a id="crunchy-buy-btn" href="#" target="_blank" rel="noopener" style="flex:2;padding:.7rem;border-radius:10px;background:rgba(249,115,22,.25);color:rgba(255,255,255,.35);font-size:.74rem;font-weight:900;text-decoration:none;text-align:center;letter-spacing:.05em;text-transform:uppercase;display:flex;align-items:center;justify-content:center;cursor:not-allowed;transition:all .3s;pointer-events:none;">Elige un plan</a>
       </div>
 
     </div>
@@ -1285,6 +1333,42 @@
       }, 300);
     }
 
+    function openCrunchyModal() {
+      document.getElementById('crunchy-modal').style.display = 'flex';
+      document.body.style.overflow = 'hidden';
+      document.querySelectorAll('.crunchy-plan').forEach(p => {
+        p.style.borderColor = 'rgba(249,115,22,.25)';
+        p.style.background = 'rgba(249,115,22,.08)';
+      });
+      const btn = document.getElementById('crunchy-buy-btn');
+      btn.href = '#'; btn.textContent = 'Elige un plan';
+      btn.style.background = 'rgba(249,115,22,.25)';
+      btn.style.color = 'rgba(255,255,255,.35)';
+      btn.style.cursor = 'not-allowed';
+      btn.style.pointerEvents = 'none';
+      btn.style.boxShadow = 'none';
+    }
+    function closeCrunchyModal() {
+      document.getElementById('crunchy-modal').style.display = 'none';
+      document.body.style.overflow = '';
+    }
+    function selectCrunchyPlan(el, plan, price, msg) {
+      document.querySelectorAll('.crunchy-plan').forEach(p => {
+        p.style.borderColor = 'rgba(249,115,22,.25)';
+        p.style.background = 'rgba(249,115,22,.08)';
+      });
+      el.style.borderColor = '#f97316';
+      el.style.background = 'rgba(249,115,22,.2)';
+      const btn = document.getElementById('crunchy-buy-btn');
+      btn.href = 'https://wa.me/51926819469?text=' + msg;
+      btn.textContent = 'Comprar · S/ ' + price;
+      btn.style.background = 'linear-gradient(135deg,#c2500a,#f97316)';
+      btn.style.color = '#fff';
+      btn.style.cursor = 'pointer';
+      btn.style.pointerEvents = 'auto';
+      btn.style.boxShadow = '0 4px 20px rgba(249,115,22,.4)';
+    }
+
     function openSurfModal() {
       document.getElementById('surf-modal').style.display = 'flex';
       document.body.style.overflow = 'hidden';
@@ -1412,7 +1496,7 @@
         e.preventDefault(); return false;
       }
     }
-    document.addEventListener('keydown', e => { if(e.key === 'Escape') { closeNitroModal(); closeDuoModal(); closeCanvaModal(); closeSurfModal(); } });
+    document.addEventListener('keydown', e => { if(e.key === 'Escape') { closeNitroModal(); closeDuoModal(); closeCanvaModal(); closeSurfModal(); closeCrunchyModal(); } });
 
     function toggleFaq(btn) {
       const item = btn.parentElement;
