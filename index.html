@@ -405,12 +405,7 @@
       white-space: nowrap; overflow: hidden;
       text-overflow: ellipsis;
     }
-    .sidebar-item .s-badge {
-      margin-left: auto; flex-shrink: 0;
-      font-size: .48rem; font-weight: 900;
-      padding: .12rem .35rem; border-radius: 3px;
-      letter-spacing: .06em; text-transform: uppercase;
-    }
+    .sidebar-item .s-badge { display: none; }
 
     .main-content { flex: 1; min-width: 0; }
 
@@ -1109,7 +1104,9 @@
     }
     function scrollToCard(id) {
       const el = document.getElementById('card-' + id);
-      if (el) el.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      if (!el) return;
+      const top = el.getBoundingClientRect().top + window.scrollY - 80;
+      window.scrollTo({ top, behavior: 'smooth' });
     }
 
     function openCanvaModal() {
